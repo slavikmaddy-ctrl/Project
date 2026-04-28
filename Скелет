@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMPIRE — 100% Независимость</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="three-effects.js" defer></script>
+<base target="_blank">
+</head>
+<body class="bg-white text-black overflow-x-hidden loading">
+
+<div id="preloader" class="preloader">
+        <div class="preloader-rings">
+            <div class="preloader-ring"></div>
+            <div class="preloader-ring"></div>
+            <div class="preloader-ring"></div>
+        </div>
+        <div class="preloader-logo">
+            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="50" cy="50" r="45" stroke="white"/>
+                <path d="M30 50 L50 30 L70 50 L50 70 Z" stroke="white" fill="none"/>
+                <circle cx="50" cy="50" r="15" stroke="white"/>
+            </svg>
+        </div>
+        <div class="preloader-text">
+            <div class="preloader-title">EMPIRE</div>
+            <div class="preloader-subtitle">100% Независимость</div>
+        </div>
+        <div class="preloader-progress">
+            <div class="preloader-progress-bar"></div>
+        </div>
+    </div>
+<div id="search-overlay" class="search-overlay">
+        <button id="close-search" class="absolute top-8 right-8 text-white">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <div class="w-full max-w-2xl">
+            <input type="text" id="search-input" class="search-input" placeholder="Поиск товаров...">
+            <div id="search-results" class="mt-8 max-h-96 overflow-y-auto"></div>
+        </div>
+    </div>
+
+    <div id="subscribe-modal" class="modal-overlay">
+        <div class="modal-container modal-subscribe">
+            <button class="modal-close" onclick="closeModal('subscribe-modal')">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <div class="modal-subscribe-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V12"></path>
+                    <path d="M4 8l8 4 8-4"></path>
+                    <path d="M4 8V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2"></path>
+                    <circle cx="12" cy="14" r="2"></circle>
+                    <path d="M12 16v2"></path>
+                </svg>
+            </div>
+
+            <h3 class="modal-title text-3xl mb-2">Скидка 15%</h3>
+            <p class="text-gray-600 mb-2 text-lg">на первую аренду</p>
+            <p class="text-sm text-gray-500 mb-6">Подпишитесь на рассылку EMPIRE и получите персональный промокод</p>
+
+            <form id="subscribe-form" class="w-full max-w-sm mx-auto">
+                <input type="email" id="subscribe-email" class="modal-subscribe-input" placeholder="Ваш email" required>
+                <button type="submit" class="w-full bg-black text-white py-4 rounded-full font-semibold text-lg hover:bg-gray-800 transition mb-3">
+                    Получить скидку
+                </button>
+            </form>
+
+            <button onclick="closeModal('subscribe-modal')" class="text-sm text-gray-400 hover:text-gray-600 underline">
+                Не сейчас, спасибо
+            </button>
+
+            <p class="text-xs text-gray-400 mt-4">Нажимая кнопку, вы соглашаетесь с <a href="#" class="underline hover:text-gray-600">политикой конфиденциальности</a></p>
+        </div>
+    </div>
+
+    <div class="bg-black text-white text-center py-3 text-xs tracking-widest uppercase font-medium cursor-pointer hover:bg-gray-900 transition" onclick="openSubscribeModal()">
+        <span class="inline-flex items-center gap-2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V12"></path>
+                <path d="M4 8l8 4 8-4"></path>
+                <path d="M4 8V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2"></path>
+            </svg>
+            Получите скидку 15% — подпишитесь на рассылку
+        </span>
+    </div>
+
+    <section class="relative h-screen bg-black overflow-hidden">
+        <!-- Video Background -->
+        <div class="absolute inset-0">
+            <video 
+                autoplay 
+                muted 
+                loop 
+                playsinline
+                poster="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=1920&h=1080&fit=crop"
+                class="w-full h-full object-cover opacity-80">
+                <source src="Video Project.mp4" type="video/mp4">
+                <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=1920&h=1080&fit=crop" 
+                     alt="EMPIRE" 
+                     class="w-full h-full object-cover">
+            </video>
+            <div class="absolute inset-0 gradient-overlay"></div>
+        </div>
+
+        <nav class="absolute top-0 left-0 right-0 z-20 flex justify-between items-center px-8 py-6 text-white">
+            <div class="flex items-center gap-8 desktop-nav">
+                <a href="index.html" class="text-sm font-medium hover:opacity-70 transition">Главная</a>
+                <a href="shop.html" class="text-sm font-medium hover:opacity-70 transition">Каталог</a>
+                <a href="news.html" class="text-sm font-medium hover:opacity-70 transition">Новости</a>
+                <a href="contact.html" class="text-sm font-medium hover:opacity-70 transition">Контакты</a>
+            </div>
+
+            <div class="absolute left-1/2 transform -translate-x-1/2 cursor-pointer" onclick="window.location.href='index.html'">
+                <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-white">
+                    <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2"/>
+                    <path d="M30 50 L50 30 L70 50 L50 70 Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <circle cx="50" cy="50" r="15" stroke="currentColor" stroke-width="2"/>
+                </svg>
+            </div>
+
+            <div class="flex items-center gap-6">
+                <button id="search-btn" class="text-sm font-medium hover:opacity-70 transition">Поиск</button>
+                <a href="rent-out.html" class="text-sm font-bold border-b-2 border-black pb-1">Сдать вещь</a>
+                <a href="dashboard.html" class="text-sm font-medium hover:opacity-70 transition">Кабинет</a>
+
+<a href="dashboard.html#points" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-red-600 to-red-500 text-white text-sm font-medium hover:shadow-lg transition">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+    </svg>
+    <span class="em-balance">0</span> EMB
+</a>
+                <a href="cart.html" class="flex items-center gap-2 cursor-pointer hover:opacity-70 transition">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="text-sm" id="cart-count">0</span>
+                </a>
+            </div>
+        </nav>
+
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-white z-10 px-4">
+            <h1 class="text-6xl md:text-8xl font-black tracking-tighter mb-2 text-center uppercase animate-pulse">
+                EMPIRE
+            </h1>
+            <p class="text-2xl md:text-4xl font-bold tracking-wide mb-8 uppercase">Аренда стиля</p>
+            <div class="flex gap-4 flex-wrap justify-center">
+                <button class="listen-btn bg-white text-black px-8 py-3 rounded-full font-semibold text-lg hover:bg-gray-100 transition" onclick="window.location.href='shop.html'">
+                    В каталог
+                </button>
+                <button class="listen-btn border-2 border-white text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-white hover:text-black transition" onclick="window.location.href='#products'">
+                    Смотреть
+                </button>
+                <button class="listen-btn bg-gradient-to-r from-red-600 to-red-500 text-white px-8 py-3 rounded-full font-semibold text-lg hover:from-red-700 hover:to-red-600 transition shadow-lg shadow-red-500/30" onclick="openSubscribeModal()">
+                    Скидка 15%
+                </button>
+            </div>
+        </div>
