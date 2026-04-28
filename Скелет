@@ -7,34 +7,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="three-effects.js" defer></script>
+    <base target="_blank">
+    
 <base target="_blank">
 </head>
 <body class="bg-white text-black overflow-x-hidden loading">
 
-<div id="preloader" class="preloader">
-        <div class="preloader-rings">
-            <div class="preloader-ring"></div>
-            <div class="preloader-ring"></div>
-            <div class="preloader-ring"></div>
-        </div>
-        <div class="preloader-logo">
-            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="50" cy="50" r="45" stroke="white"/>
-                <path d="M30 50 L50 30 L70 50 L50 70 Z" stroke="white" fill="none"/>
-                <circle cx="50" cy="50" r="15" stroke="white"/>
-            </svg>
-        </div>
-        <div class="preloader-text">
-            <div class="preloader-title">EMPIRE</div>
-            <div class="preloader-subtitle">100% Независимость</div>
-        </div>
-        <div class="preloader-progress">
-            <div class="preloader-progress-bar"></div>
-        </div>
-    </div>
-<div id="search-overlay" class="search-overlay">
+    <div id="search-overlay" class="search-overlay">
         <button id="close-search" class="absolute top-8 right-8 text-white">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -97,7 +76,6 @@
     </div>
 
     <section class="relative h-screen bg-black overflow-hidden">
-        <!-- Video Background -->
         <div class="absolute inset-0">
             <video 
                 autoplay 
@@ -111,7 +89,7 @@
                      alt="EMPIRE" 
                      class="w-full h-full object-cover">
             </video>
-            <div class="absolute inset-0 gradient-overlay"></div>
+            <div class="absolute inset-0" style="background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.6) 100%);"></div>
         </div>
 
         <nav class="absolute top-0 left-0 right-0 z-20 flex justify-between items-center px-8 py-6 text-white">
@@ -135,12 +113,12 @@
                 <a href="rent-out.html" class="text-sm font-bold border-b-2 border-black pb-1">Сдать вещь</a>
                 <a href="dashboard.html" class="text-sm font-medium hover:opacity-70 transition">Кабинет</a>
 
-<a href="dashboard.html#points" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-red-600 to-red-500 text-white text-sm font-medium hover:shadow-lg transition">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-    </svg>
-    <span class="em-balance">0</span> EMB
-</a>
+                <a href="dashboard.html#points" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-red-600 to-red-500 text-white text-sm font-medium hover:shadow-lg transition">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                    <span class="em-balance">0</span> EMB
+                </a>
                 <a href="cart.html" class="flex items-center gap-2 cursor-pointer hover:opacity-70 transition">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
@@ -169,3 +147,420 @@
                 </button>
             </div>
         </div>
+
+        <div class="absolute bottom-8 right-8 z-20 flex gap-2">
+            <button id="mute-toggle" class="video-control-btn" onclick="toggleMute()">
+                <svg id="mute-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <line x1="23" y1="9" x2="17" y2="15"></line>
+                    <line x1="17" y1="9" x2="23" y2="15"></line>
+                </svg>
+            </button>
+            <button id="pause-toggle" class="video-control-btn" onclick="toggleVideo()">
+                <svg id="pause-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="6" y="4" width="4" height="16"></rect>
+                    <rect x="14" y="4" width="4" height="16"></rect>
+                </svg>
+            </button>
+        </div>
+    </section>
+
+</body>
+</html>
+
+:root {
+            --color-black: #000000;
+            --color-white: #ffffff;
+            --color-red: #dc2626;
+            --color-red-dark: #b91c1c;
+            --color-gray-50: #f9fafb;
+            --color-gray-100: #f3f4f6;
+            --color-gray-200: #e5e7eb;
+            --color-gray-300: #d1d5db;
+            --color-gray-400: #9ca3af;
+            --color-gray-500: #6b7280;
+            --color-gray-600: #4b5563;
+            --color-gray-700: #374151;
+            --color-gray-800: #1f2937;
+            --color-gray-900: #111827;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --transition-fast: 0.15s ease;
+            --transition-base: 0.3s ease;
+            --transition-slow: 0.5s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--color-white);
+            color: var(--color-black);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body.loading {
+            overflow: hidden;
+        }
+
+        .search-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(20px);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 15vh;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .search-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .search-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding: 16px 0;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-white);
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-input::placeholder {
+            color: rgba(255,255,255,0.4);
+        }
+
+        .search-input:focus {
+            border-color: var(--color-white);
+        }
+
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-container {
+            background: var(--color-white);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 480px;
+            width: 100%;
+            position: relative;
+            transform: scale(0.95) translateY(20px);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: var(--color-gray-100);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--color-gray-200);
+        }
+
+        .modal-subscribe {
+            text-align: center;
+        }
+
+        .modal-subscribe-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 20px;
+            color: var(--color-red);
+        }
+
+        .modal-title {
+            font-size: 28px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        .modal-subscribe-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid var(--color-gray-200);
+            border-radius: 100px;
+            font-size: 16px;
+            font-family: var(--font-family);
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            margin-bottom: 12px;
+        }
+
+        .modal-subscribe-input:focus {
+            border-color: var(--color-black);
+            box-shadow: 0 0 0 4px rgba(0,0,0,0.1);
+        }
+
+
+        .top-bar {
+            background: var(--color-black);
+            color: var(--color-white);
+            text-align: center;
+            padding: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .top-bar:hover {
+            background: var(--color-gray-900);
+        }
+
+
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            background: var(--color-black);
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            inset: 0;
+        }
+
+        .hero-video video,
+        .hero-video img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+        }
+
+        .gradient-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(0,0,0,0.4) 0%,
+                rgba(0,0,0,0.1) 50%,
+                rgba(0,0,0,0.6) 100%
+            );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 0 16px;
+            text-align: center;
+            color: var(--color-white);
+        }
+
+        .hero-title {
+            font-size: 72px;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @media (min-width: 768px) {
+            .hero-title {
+                font-size: 96px;
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 32px;
+        }
+
+        @media (min-width: 768px) {
+            .hero-subtitle {
+                font-size: 36px;
+            }
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .listen-btn {
+            padding: 12px 32px;
+            border-radius: 100px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-family: var(--font-family);
+        }
+
+        .listen-btn:hover {
+            transform: translateY(-2px);
+        }
+
+
+        .nav-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-white);
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .nav-link:hover {
+            opacity: 0.7;
+        }
+
+        .nav-link-active {
+            font-weight: 700;
+            border-bottom: 2px solid var(--color-black);
+            padding-bottom: 4px;
+        }
+
+        .em-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border-radius: 100px;
+            background: linear-gradient(135deg, var(--color-red), #ef4444);
+            color: var(--color-white);
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .em-badge:hover {
+            box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4);
+        }
+
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .animate-slide-up {
+            animation: slideUp 0.6s ease forwards;
+        }
+
+
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 48px;
+            }
+            
+            .hero-subtitle {
+                font-size: 20px;
+            }
+            
+            .listen-btn {
+                padding: 10px 24px;
+                font-size: 16px;
+            }
+        }
+
+
+        .video-control-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(8px);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+
+        .video-control-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
