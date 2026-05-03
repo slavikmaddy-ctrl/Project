@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMPIRE — 100% Независимость</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <base target="_blank">
+</head>
+<body class="bg-white text-black overflow-x-hidden loading">
+
+    <div id="preloader" class="preloader">
+        <div class="preloader-rings">
+            <div class="preloader-ring"></div>
+            <div class="preloader-ring"></div>
+            <div class="preloader-ring"></div>
+        </div>
+        <div class="preloader-logo">
+            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="50" cy="50" r="45" stroke="white"/>
+                <path d="M30 50 L50 30 L70 50 L50 70 Z" stroke="white" fill="none"/>
+                <circle cx="50" cy="50" r="15" stroke="white"/>
+            </svg>
+        </div>
+        <div class="preloader-text">
+            <div class="preloader-title">EMPIRE</div>
+            <div class="preloader-subtitle">100% Независимость</div>
+        </div>
+        <div class="preloader-progress">
+            <div class="preloader-progress-bar"></div>
+        </div>
+    </div>
+
+    <div id="search-overlay" class="search-overlay">
+        <button id="close-search" class="absolute top-8 right-8 text-white">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <div class="w-full max-w-2xl px-8">
+            <input type="text" id="search-input" class="search-input" placeholder="Поиск товаров...">
+            <div id="search-results" class="mt-8 max-h-96 overflow-y-auto"></div>
+        </div>
+    </div>
+
+    <!-- Subscribe Modal -->
+    <div id="subscribe-modal" class="modal-overlay">
+        <div class="modal-container modal-subscribe">
+            <button class="modal-close" onclick="closeModal('subscribe-modal')">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="modal-subscribe-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V12"></path>
+                    <path d="M4 8l8 4 8-4"></path>
+                    <path d="M4 8V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2"></path>
+                    <circle cx="12" cy="14" r="2"></circle>
+                    <path d="M12 16v2"></path>
+                </svg>
+            </div>
+            <h3 class="text-3xl font-black mb-2 text-center">Скидка 15%</h3>
+            <p class="text-gray-600 mb-2 text-lg text-center">на первую аренду</p>
+            <p class="text-sm text-gray-500 mb-6 text-center">Подпишитесь на рассылку EMPIRE и получите персональный промокод</p>
+            <form id="subscribe-form" class="w-full max-w-sm mx-auto">
+                <input type="email" id="subscribe-email" class="modal-subscribe-input" placeholder="Ваш email" required>
+                <button type="submit" class="w-full bg-black text-white py-4 rounded-full font-semibold text-lg hover:bg-gray-800 transition mb-3">
+                    Получить скидку
+                </button>
+            </form>
+            <button onclick="closeModal('subscribe-modal')" class="text-sm text-gray-400 hover:text-gray-600 underline block mx-auto">
+                Не сейчас, спасибо
+            </button>
+            <p class="text-xs text-gray-400 mt-4 text-center">Нажимая кнопку, вы соглашаетесь с <a href="#" class="underline hover:text-gray-600">политикой конфиденциальности</a></p>
+        </div>
+    </div>
+
+    <div class="bg-black text-white text-center py-3 text-xs tracking-widest uppercase font-medium cursor-pointer hover:bg-gray-900 transition" onclick="openSubscribeModal()">
+        <span class="inline-flex items-center gap-2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V12"></path>
+                <path d="M4 8l8 4 8-4"></path>
+                <path d="M4 8V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2"></path>
+            </svg>
+            Получите скидку 15% — подпишитесь на рассылку
+        </span>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen bg-black overflow-hidden">
+        <div class="absolute inset-0">
+            <video autoplay muted loop playsinline
+                poster="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=1920&h=1080&fit=crop"
+                class="w-full h-full object-cover opacity-80">
+                <source src="Video Project.mp4" type="video/mp4">
+                <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=1920&h=1080&fit=crop" alt="EMPIRE" class="w-full h-full object-cover">
+            </video>
+            <div class="absolute inset-0 gradient-overlay"></div>
+        </div>
+
+        <nav class="absolute top-0 left-0 right-0 z-20 flex justify-between items-center px-8 py-6 text-white">
+            <div class="flex items-center gap-8 desktop-nav">
+                <a href="index.html" class="text-sm font-medium hover:opacity-70 transition">Главная</a>
+                <a href="shop.html" class="text-sm font-medium hover:opacity-70 transition">Каталог</a>
+                <a href="news.html" class="text-sm font-medium hover:opacity-70 transition">Новости</a>
+                <a href="contact.html" class="text-sm font-medium hover:opacity-70 transition">Контакты</a>
+            </div>
+
+            <div class="absolute left-1/2 transform -translate-x-1/2 cursor-pointer" onclick="window.location.href='index.html'">
+                <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-white">
+                    <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2"/>
+                    <path d="M30 50 L50 30 L70 50 L50 70 Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <circle cx="50" cy="50" r="15" stroke="currentColor" stroke-width="2"/>
+                </svg>
+            </div>
+
+            <div class="flex items-center gap-6">
+                <button id="search-btn" class="text-sm font-medium hover:opacity-70 transition">Поиск</button>
+                <a href="rent-out.html" class="text-sm font-bold border-b-2 border-white pb-1">Сдать вещь</a>
+                <a href="dashboard.html" class="text-sm font-medium hover:opacity-70 transition">Кабинет</a>
+                <a href="dashboard.html#points" class="flex items-center gap-2 px-3 py-1.5 rounded-full em-badge text-white text-sm font-medium hover:shadow-lg transition">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                    <span class="em-balance">0</span> EMB
+                </a>
+                <a href="cart.html" class="flex items-center gap-2 cursor-pointer hover:opacity-70 transition">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="text-sm" id="cart-count">0</span>
+                </a>
+            </div>
+        </nav>
+
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-white z-10 px-4">
+            <h1 class="text-6xl md:text-8xl font-black tracking-tighter mb-2 text-center uppercase animate-pulse">
+                EMPIRE
+            </h1>
+            <p class="text-2xl md:text-4xl font-bold tracking-wide mb-8 uppercase">Аренда стиля</p>
+            <div class="flex gap-4 flex-wrap justify-center">
+                <button class="bg-white text-black px-8 py-3 rounded-full font-semibold text-lg hover:bg-gray-100 transition" onclick="window.location.href='shop.html'">
+                    В каталог
+                </button>
+                <button class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-white hover:text-black transition" onclick="window.location.href='#products'">
+                    Смотреть
+                </button>
+                <button class="bg-gradient-to-r from-red-600 to-red-500 text-white px-8 py-3 rounded-full font-semibold text-lg hover:from-red-700 hover:to-red-600 transition shadow-lg shadow-red-500/30" onclick="openSubscribeModal()">
+                    Скидка 15%
+                </button>
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 right-8 z-20 flex gap-2">
+            <button id="mute-toggle" class="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition" onclick="toggleMute()">
+                <svg id="mute-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <line x1="23" y1="9" x2="17" y2="15"></line>
+                    <line x1="17" y1="9" x2="23" y2="15"></line>
+                </svg>
+            </button>
+            <button id="pause-toggle" class="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition" onclick="toggleVideo()">
+                <svg id="pause-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="6" y="4" width="4" height="16"></rect>
+                    <rect x="14" y="4" width="4" height="16"></rect>
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <section id="products" class="py-20 px-8 max-w-[1400px] mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
+            <h2 class="text-5xl md:text-7xl font-black tracking-tighter uppercase">Каталог</h2>
+            <div class="flex flex-wrap gap-3">
+                <button class="category-pill active px-4 py-2 rounded-full border border-gray-300 text-sm font-medium" data-filter="all">Популярное</button>
+                <button class="category-pill px-4 py-2 rounded-full border border-gray-300 text-sm font-medium" data-filter="bestseller">Хиты</button>
+                <button class="category-pill px-4 py-2 rounded-full border border-gray-300 text-sm font-medium" data-filter="music">Винил</button>
+                <button class="category-pill px-4 py-2 rounded-full border border-gray-300 text-sm font-medium" data-filter="clothing">Одежда</button>
+                <a href="shop.html" class="category-pill px-4 py-2 rounded-full border border-gray-300 text-sm font-medium hover:bg-black hover:text-white transition">Весь каталог →</a>
+            </div>
+        </div>
+
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+    </section>
+
+    <section class="bg-black text-white py-16 px-8">
+        <div class="max-w-[1400px] mx-auto text-center">
+            <h2 class="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-4">Станьте частью EMPIRE</h2>
+            <p class="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">Подпишитесь и получите скидку 15% на первую аренду, а также доступ к эксклюзивным дропам</p>
+            <button class="bg-white text-black px-10 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition" onclick="openSubscribeModal()">
+                Получить скидку 15%
+            </button>
+        </div>
+    </section>
+
+    <section class="py-20 px-8 max-w-[1400px] mx-auto bg-gray-50">
+        <div class="flex justify-between items-center mb-12">
+            <h2 class="text-5xl md:text-7xl font-black tracking-tighter uppercase">Новости</h2>
+            <a href="news.html" class="bg-black text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-gray-800 transition">Все новости</a>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Featured Article -->
+            <div class="lg:col-span-2 news-card" onclick="window.location.href='article.html?id=1'">
+                <div class="relative rounded-xl overflow-hidden aspect-[16/9] mb-4">
+                    <span class="badge absolute top-4 left-4 bg-black text-white text-xs font-bold px-4 py-2 rounded-full uppercase">Новый артист</span>
+                    <img src="https://obs-image-service-mz.obs.ru-moscow-1.hc.sbercloud.ru/e3d0c944-b7ed-4a98-80c3-b90b2058cc1d" alt="Bebe Rexha" class="w-full h-full object-cover">
+                </div>
+                <h3 class="text-xl font-bold mb-2">Bebe Rexha заключила партнёрство с EMPIRE</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    Четырёхкратная номинантка на Грэмми поп-исполнительница и автор песен Bebe Rexha стала независимым артистом и заключила партнёрство с EMPIRE...
+                </p>
+            </div>
+
+            <div class="flex flex-col gap-6">
+                <div class="news-card" onclick="window.location.href='article.html?id=3'">
+                    <div class="relative rounded-xl overflow-hidden aspect-square mb-3">
+                        <img src="https://s.yimg.com/ny/api/res/1.2/XZVEaymcfdaRIu.k3XTt3Q--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyNDI7aD02OTk7Y2Y9d2VicA--/https://media.zenfs.com/en/reality_tea_694/de662dd8e9b2a22a615b9e5b423669ea" alt="News" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-bold text-sm">Wizkid и Asake выпустили 'Real'</h3>
+                </div>
+                <div class="news-card" onclick="window.location.href='article.html?id=4'">
+                    <div class="relative rounded-xl overflow-hidden aspect-square mb-3">
+                        <img src="https://i.dailymail.co.uk/i/pix/2016/02/07/23/30FB106300000578-3436468-image-m-36_1454889232681.jpg" alt="News" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-bold text-sm">Новые артисты ростера EMPIRE</h3>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 news-card" onclick="window.location.href='article.html?id=2'">
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="relative rounded-xl overflow-hidden aspect-video md:w-1/2">
+                        <span class="badge absolute top-4 left-4 bg-black text-white text-xs font-bold px-4 py-2 rounded-full uppercase">Интервью</span>
+                        <img src="https://www.billboard.com/wp-content/uploads/2025/02/cover-ghazi-billboard-2025-bb03-austin-hargrave-3-1260.jpg" alt="Ghazi" class="w-full h-full object-cover">
+                    </div>
+                    <div class="md:w-1/2 flex flex-col justify-center">
+                        <h3 class="text-xl font-bold mb-3">Звезда Залива: Как Гази из EMPIRE привёл музыкальный бизнес в Сан-Франциско</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Гази из EMPIRE рассказывает о любви к Сан-Франциско, успехах в музыкальном бизнесе, Shaboozey, Lyor Cohen и многом другом в обложной статье Billboard.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="news-card" onclick="window.location.href='article.html?id=5'">
+                <div class="relative rounded-xl overflow-hidden aspect-square">
+                    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop" alt="News" class="w-full h-full object-cover">
+                </div>
+                <h3 class="font-bold text-sm mt-3">EMPIRE Showcase на SXSW 2025</h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-8 max-w-[1400px] mx-auto">
+        <div class="flex justify-between items-center mb-12">
+            <h2 class="text-5xl md:text-7xl font-black tracking-tighter uppercase">Соцсети</h2>
+            <button class="bg-black text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-gray-800 transition" onclick="window.open('https://instagram.com', '_blank')">Подписаться</button>
+        </div>
+
+        <div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+            <div class="social-image flex-shrink-0 w-48 h-48 rounded-xl overflow-hidden">
+                <img src="https://i.pinimg.com/originals/80/be/31/80be31dd84a8ca651676cddf9cd17c77.jpg?nii=t" class="w-full h-full object-cover">
+            </div>
+            <div class="social-image flex-shrink-0 w-48 h-48 rounded-xl overflow-hidden">
+                <img src="https://img.freepik.com/free-photo/full-shot-people-jumping-sunset_23-2150343119.jpg" class="w-full h-full object-cover">
+            </div>
+            <div class="social-image flex-shrink-0 w-48 h-48 rounded-xl overflow-hidden">
+                <img src="https://img.freepik.com/premium-photo/full-length-man-standing-rocks-against-mountain_1048944-29152187.jpg?semt=ais_hybrid&w=740" class="w-full h-full object-cover">
+            </div>
+            <div class="social-image flex-shrink-0 w-48 h-48 rounded-xl overflow-hidden">
+                <img src="https://img.freepik.com/premium-photo/group-young-smiling-friends-raising-their-hands-up-concept_250132-13809.jpg?semt=ais_hybrid&w=740&q=80" class="w-full h-full object-cover">
+            </div>
+            <div class="social-image flex-shrink-0 w-48 h-48 rounded-xl overflow-hidden">
+                <img src="https://i.pinimg.com/736x/92/57/ba/9257ba467f10f2e1f6156f972aae6c7c.jpg" class="w-full h-full object-cover">
+            </div>
+            <div class="social-image flex-shrink-0 w-48 h-48 rounded-xl overflow-hidden">
+                <img src="https://i.pinimg.com/736x/7b/4c/44/7b4c440decf7ad416db142e3211d8415.jpg" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </section>
+
+    <div class="bg-black text-white py-4 overflow-hidden border-b border-gray-800">
+        <div class="marquee whitespace-nowrap">
+            <span class="text-sm font-bold tracking-widest mx-8">100% НЕЗАВИСИМОСТЬ</span>
+            <span class="mx-4">
+                <svg width="20" height="20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" class="inline">
+                    <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+                </svg>
+            </span>
+            <span class="text-sm font-bold tracking-widest mx-8">100% НЕЗАВИСИМОСТЬ</span>
+            <span class="mx-4">
+                <svg width="20" height="20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" class="inline">
+                    <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+                </svg>
+            </span>
+            <span class="text-sm font-bold tracking-widest mx-8">100% НЕЗАВИСИМОСТЬ</span>
+            <span class="mx-4">
+                <svg width="20" height="20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" class="inline">
+                    <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+                </svg>
+            </span>
+            <span class="text-sm font-bold tracking-widest mx-8">100% НЕЗАВИСИМОСТЬ</span>
+            <span class="mx-4">
+                <svg width="20" height="20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" class="inline">
+                    <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+                </svg>
+            </span>
+        </div>
+    </div>
+
+    <footer class="bg-black text-white py-16 px-8">
+        <div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div>
+                <svg width="50" height="50" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" class="mb-4">
+                    <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+                </svg>
+                <p class="text-xs text-gray-400 mb-6">100% Независимость • Лейбл • Дистрибьютор • Издатель</p>
+                <div class="flex gap-4">
+                    <a href="https://instagram.com" target="_blank" class="hover:text-gray-400 transition">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" class="hover:text-gray-400 transition">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                    <a href="https://facebook.com" target="_blank" class="hover:text-gray-400 transition">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Компания</h4>
+                <ul class="space-y-3 text-sm">
+                    <li><a href="contact.html" class="hover:text-gray-400 transition">Связаться</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Магазин</h4>
+                <ul class="space-y-3 text-sm">
+                    <li><a href="shop.html" class="hover:text-gray-400 transition">Все товары</a></li>
+                    <li><a href="shop.html" class="hover:text-gray-400 transition">Музыка</a></li>
+                    <li><a href="shop.html" class="hover:text-gray-400 transition">Одежда</a></li>
+                    <li><a href="shop.html" class="hover:text-gray-400 transition">Аксессуары</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Правовая информация</h4>
+                <ul class="space-y-3 text-sm">
+                    <li><a href="#" class="hover:text-gray-400 transition">Политика конфиденциальности</a></li>
+                    <li><a href="#" class="hover:text-gray-400 transition">Условия использования</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="max-w-[1400px] mx-auto mt-16 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-xs text-gray-500">© 2025 EMPIRE DISTRIBUTION</p>
+            <div class="flex gap-2">
+                <div class="bg-white rounded px-2 py-1"><span class="text-black text-xs font-bold">VISA</span></div>
+                <div class="bg-white rounded px-2 py-1"><span class="text-black text-xs font-bold">MC</span></div>
+                <div class="bg-white rounded px-2 py-1"><span class="text-black text-xs font-bold">Stripe</span></div>
+                <div class="bg-white rounded px-2 py-1"><span class="text-black text-xs font-bold">PayPal</span></div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="toast-container"></div>
+<script src="main.js"></script>    
+</body>
+</html>
+
+СТИЛИ: 
+        * { font-family: 'Inter', sans-serif; }
+        body { overflow-x: hidden; }
+        
+        .preloader {
+            position: fixed; inset: 0; z-index: 9999;
+            background: #000; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; transition: opacity 0.8s, visibility 0.8s;
+        }
+        .preloader.hidden { opacity: 0; visibility: hidden; }
+        .preloader-rings { position: relative; width: 120px; height: 120px; margin-bottom: 2rem; }
+        .preloader-ring {
+            position: absolute; inset: 0; border: 2px solid transparent;
+            border-top-color: #fff; border-radius: 50%;
+            animation: spin 1.5s linear infinite;
+        }
+        .preloader-ring:nth-child(2) { inset: 10px; animation-duration: 1.2s; animation-direction: reverse; }
+        .preloader-ring:nth-child(3) { inset: 20px; animation-duration: 0.9s; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .preloader-logo { width: 60px; height: 60px; color: white; margin-bottom: 1.5rem; }
+        .preloader-title { font-size: 1.5rem; font-weight: 900; letter-spacing: 0.2em; color: white; text-transform: uppercase; }
+        .preloader-subtitle { font-size: 0.875rem; color: #666; margin-top: 0.5rem; letter-spacing: 0.1em; }
+        .preloader-progress { width: 200px; height: 2px; background: #333; margin-top: 2rem; border-radius: 1px; overflow: hidden; }
+        .preloader-progress-bar { height: 100%; background: #fff; width: 0%; transition: width 0.3s; }
+        
+        .search-overlay {
+            position: fixed; inset: 0; z-index: 100;
+            background: rgba(0,0,0,0.95); backdrop-filter: blur(20px);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; transition: all 0.4s;
+        }
+        .search-overlay.active { opacity: 1; visibility: visible; }
+        .search-input {
+            width: 100%; background: transparent; border: none;
+            border-bottom: 2px solid white; color: white;
+            font-size: 2rem; font-weight: 300; padding: 1rem 0;
+            outline: none;
+        }
+        .search-input::placeholder { color: #666; }
+        
+        .modal-overlay {
+            position: fixed; inset: 0; z-index: 100;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(10px);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; transition: all 0.3s;
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-container {
+            background: white; border-radius: 1.5rem; padding: 2.5rem;
+            max-width: 500px; width: 90%; position: relative;
+            transform: scale(0.9); transition: transform 0.3s;
+        }
+        .modal-overlay.active .modal-container { transform: scale(1); }
+        .modal-close {
+            position: absolute; top: 1.5rem; right: 1.5rem;
+            background: none; border: none; cursor: pointer; padding: 0.5rem;
+        }
+        .modal-subscribe-icon { width: 60px; height: 60px; margin: 0 auto 1.5rem; color: #dc2626; }
+        .modal-subscribe-input {
+            width: 100%; padding: 1rem 1.5rem; border: 2px solid #e5e7eb;
+            border-radius: 9999px; font-size: 1rem; margin-bottom: 1rem;
+            outline: none; transition: border-color 0.2s;
+        }
+        .modal-subscribe-input:focus { border-color: #000; }
+        
+        .gradient-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.4) 100%);
+        }
+        .desktop-nav { display: flex; }
+        @media (max-width: 768px) { .desktop-nav { display: none; } }
+        
+        .category-pill {
+            transition: all 0.2s; cursor: pointer; background: white;
+        }
+        .category-pill:hover { border-color: #000; }
+        .category-pill.active { background: #000; color: #fff; border-color: #000; }
+        
+        .product-card {
+            cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .product-card:hover { transform: translateY(-4px); }
+        .product-card:hover .product-image { transform: scale(1.05); }
+        .product-image { transition: transform 0.5s; }
+        .badge {
+            position: absolute; z-index: 10;
+            font-size: 0.625rem; font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+        
+        .news-card { cursor: pointer; transition: opacity 0.2s; }
+        .news-card:hover { opacity: 0.85; }
+        .news-card img { transition: transform 0.5s; }
+        .news-card:hover img { transform: scale(1.03); }
+        
+        .social-image { transition: transform 0.3s; cursor: pointer; }
+        .social-image:hover { transform: scale(1.05); }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .marquee { animation: marquee 20s linear infinite; }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.85; }
+        }
+        .animate-pulse { animation: pulse 3s ease-in-out infinite; }
+        
+        .toast {
+            position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: #000; color: #fff; padding: 1rem 2rem; border-radius: 9999px;
+            font-weight: 500; z-index: 200; opacity: 0; transition: all 0.4s;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .toast.success { background: #16a34a; }
+        .toast.error { background: #dc2626; }
+        .toast.warning { background: #ca8a04; }
+        
+        .em-badge {
+            background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+        }
+
+js:
+        const products = [
+            {
+                id: 1, name: "EMPIRE x New Era 9FORTY Красный Снепбек", 
+                price: 45, period: "/1 день", category: "accessories", 
+                image: "https://n.cdn.cdek.shopping/images/shopping/jZJ5x20CqdKT7efe.jpg?v=1",
+                badge: "Снепбек", badgeClass: "bg-black text-white"
+            },
+            {
+                id: 2, name: "EMPIRE 1M Худи Чёрный", 
+                price: 80, period: "/1 день", category: "clothing", 
+                image: "https://adaptclothing.com/cdn/shop/products/Zoom_2a6f3286-fc1e-44f3-bb26-d2410817976c_1024x1024.jpg",
+                badge: "Худи", badgeClass: "bg-black text-white",
+                badge2: "Хит", badge2Class: "bg-white text-black top-3 right-3"
+            },
+            {
+                id: 3, name: "EMPIRE 1M Футболка Чёрная", 
+                price: 40, period: "/1 день", category: "clothing", 
+                image: "https://gd1.alicdn.com/bao/uploaded/i1/749431973/TB2l9avipXXXXawXpXXXXXXXXXX_!!749431973.jpg",
+                badge: "Футболка", badgeClass: "bg-black text-white"
+            },
+            {
+                id: 4, name: "EMPIRE x Starter Парка Чёрная/Белая", 
+                price: 175, period: "/1 день", category: "clothing", 
+                image: "https://n.cdn.cdek.shopping/images/shopping/WUgGkcE1wC0U2x0k.jpg?v=1",
+                badge: "Парка", badgeClass: "bg-black text-white",
+                badge2: "Лимитка", badge2Class: "bg-red-600 text-white top-3 right-3"
+            },
+            {
+                id: 5, name: "EMPIRE x Starter Парка Белая/Чёрная", 
+                price: 175, period: "/1 день", category: "clothing", 
+                image: "https://n.cdn.cdek.shopping/images/shopping/FeZMJLzGRLkFvyil.webp?v=1",
+                badge: "Парка", badgeClass: "bg-black text-white"
+            },
+            {
+                id: 6, name: "EMPIRE Футболка с Логотипом Белая", 
+                price: 35, period: "/1 день", category: "clothing", 
+                image: "https://img-edg.joomcdn.net/bd3f9ebcd57461aa4fb2b4f9d73084528cdcee44_original.jpeg",
+                badge: "Футболка", badgeClass: "bg-black text-white"
+            },
+            {
+                id: 7, name: "EMPIRE Лонгслив Чёрный", 
+                price: 45, period: "/1 день", category: "clothing", 
+                image: "https://avatars.mds.yandex.net/get-mpic/5212780/img_id1678074573524565973.jpeg/orig",
+                badge: "Лонгслив", badgeClass: "bg-black text-white"
+            },
+            {
+                id: 8, name: "EMPIRE Шапка Бини Чёрная", 
+                price: 20, period: "/1 день", category: "accessories", 
+                image: "https://a.lmcdn.ru/product/M/P/MP002XU016PH_31077361_5_v2_2x.jpg",
+                badge: "Шапка", badgeClass: "bg-black text-white",
+                oldPrice: 30, saleBadge: "−33%", saleClass: "bg-red-600 text-white bottom-3 left-3"
+            },
+            {
+                id: 9, name: "EMPIRE Винил Wizkid 'Real'", 
+                price: 35, period: "/3 дня", category: "music", 
+                image: "https://i.ytimg.com/vi/sCBNlK2HVww/maxresdefault.jpg",
+                badge: "Винил", badgeClass: "bg-black text-white"
+            },
+            {
+                id: 10, name: "EMPIRE CD Бандл", 
+                price: 50, period: "/3 дня", category: "music", 
+                image: "https://cdn1.ozone.ru/s3/multimedia-1-b/7102006643.jpg",
+                badge: "CD", badgeClass: "bg-black text-white"
+            },
+            {
+                id: 11, name: "EMPIRE x New Era Чёрный Снепбек", 
+                price: 45, period: "/1 день", category: "accessories", 
+                image: "https://a.lmcdn.ru/img600x866/M/P/MP002XM09LV9_15739750_9_v1_2x.jpg",
+                badge: "Снепбек", badgeClass: "bg-black text-white"
+            },
+            {
+                id: 12, name: "EMPIRE Носки 3 пары", 
+                price: 25, period: "/1 день", category: "accessories", 
+                image: "https://n.cdn.cdek.shopping/images/shopping/inEZKdAIiwEqOtiO.jpg?v=1",
+                badge: "Носки", badgeClass: "bg-black text-white"
+            }
+        ];
+
+        function renderProducts(filter = 'all') {
+            const grid = document.getElementById('products-grid');
+            let filtered = products;
+            
+            if (filter === 'bestseller') {
+                filtered = products.filter(p => p.badge2 === 'Хит');
+            } else if (filter === 'music') {
+                filtered = products.filter(p => p.category === 'music');
+            } else if (filter === 'clothing') {
+                filtered = products.filter(p => p.category === 'clothing');
+            }
+            
+            grid.innerHTML = filtered.map(product => `
+                <div class="product-card group" data-category="${product.category}">
+                    <a href="product.html?id=${product.id}" class="block">
+                        <div class="relative bg-gray-100 rounded-lg overflow-hidden aspect-square mb-4">
+                            <span class="badge absolute top-3 left-3 ${product.badgeClass} text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">${product.badge}</span>
+                            ${product.badge2 ? `<span class="badge absolute ${product.badge2Class} text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">${product.badge2}</span>` : ''}
+                            ${product.saleBadge ? `<span class="badge absolute ${product.saleClass} text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">${product.saleBadge}</span>` : ''}
+                            <img src="${product.image}" alt="${product.name}" 
+                                 class="product-image w-full h-full object-cover"
+                                 loading="lazy"
+                                 onerror="this.src='https://via.placeholder.com/400x400/f3f4f6/000000?text=EMPIRE'">
+                        </div>
+                        <h3 class="font-semibold text-sm mb-1 group-hover:opacity-70 transition">${product.name}</h3>
+                        <p class="text-gray-500 text-sm font-medium">
+                            ${product.oldPrice ? `<span class="line-through text-gray-400 mr-1">$${product.oldPrice}${product.period}</span>` : ''}
+                            <span class="${product.saleBadge ? 'text-red-600' : ''}">$${product.price}${product.period}</span>
+                        </p>
+                    </a>
+                </div>
+            `).join('');
+        }
+
+        document.querySelectorAll('.category-pill').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.category-pill').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderProducts(btn.dataset.filter);
+            });
+        });
+
+        const searchOverlay = document.getElementById('search-overlay');
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+
+        document.getElementById('search-btn').addEventListener('click', () => {
+            searchOverlay.classList.add('active');
+            searchInput.focus();
+        });
+
+        document.getElementById('close-search').addEventListener('click', () => {
+            searchOverlay.classList.remove('active');
+        });
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            if (!query) { searchResults.innerHTML = ''; return; }
+            
+            const found = products.filter(p => p.name.toLowerCase().includes(query));
+            searchResults.innerHTML = found.length ? found.map(p => `
+                <a href="product.html?id=${p.id}" class="flex items-center gap-4 p-4 hover:bg-white/10 rounded-lg transition">
+                    <img src="${p.image}" class="w-12 h-12 rounded object-cover">
+                    <div>
+                        <div class="text-white font-medium">${p.name}</div>
+                        <div class="text-gray-400 text-sm">$${p.price}${p.period}</div>
+                    </div>
+                </a>
+            `).join('') : '<p class="text-gray-400 text-center">Ничего не найдено</p>';
+        });
+
+        function openModal(id) { document.getElementById(id).classList.add('active'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+        window.openSubscribeModal = () => openModal('subscribe-modal');
+        window.closeModal = closeModal;
+
+        document.getElementById('subscribe-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('subscribe-email').value;
+            localStorage.setItem('empire_subscribed', JSON.stringify({ email, date: new Date().toISOString() }));
+            showToast('Скидка 15% активирована! Проверьте email.', 'success');
+            closeModal('subscribe-modal');
+        });
+
+        const video = document.querySelector('video');
+        window.toggleMute = () => {
+            video.muted = !video.muted;
+            document.getElementById('mute-icon').innerHTML = video.muted 
+                ? '<polygon points=\"11 5 6 9 2 9 2 15 6 15 11 19 11 5\"></polygon><line x1=\"23\" y1=\"9\" x2=\"17\" y2=\"15\"></line><line x1=\"17\" y1=\"9\" x2=\"23\" y2=\"15\"></line>'
+                : '<polygon points=\"11 5 6 9 2 9 2 15 6 15 11 19 11 5\"></polygon><path d=\"M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07\"></path>';
+        };
+        window.toggleVideo = () => {
+            video.paused ? video.play() : video.pause();
+            document.getElementById('pause-icon').innerHTML = video.paused
+                ? '<polygon points=\"5 3 19 12 5 21 5 3\"></polygon>'
+                : '<rect x=\"6\" y=\"4\" width=\"4\" height=\"16\"></rect><rect x=\"14\" y=\"4\" width=\"4\" height=\"16\"></rect>';
+        };
+
+        function showToast(message, type = '') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.add('show'), 10);
+            setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 400); }, 3000);
+        }
+        window.showToast = showToast;
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('empire_cart') || '[]');
+            document.getElementById('cart-count').textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+        }
+        updateCartCount();
+
+        function updateEMBalance() {
+            const points = JSON.parse(localStorage.getItem('empire_em_points') || '{"balance": 0}');
+            document.querySelectorAll('.em-balance').forEach(el => el.textContent = points.balance);
+        }
+        updateEMBalance();
+
+        (function() {
+            const preloader = document.getElementById('preloader');
+            const progressBar = document.querySelector('.preloader-progress-bar');
+            const body = document.body;
+            let progress = 0;
+            const minTime = 2000;
+            const startTime = Date.now();
+
+            const progressInterval = setInterval(() => {
+                if (progress < 90) {
+                    progress += Math.random() * 15;
+                    if (progress > 90) progress = 90;
+                    if (progressBar) progressBar.style.width = progress + '%';
+                }
+            }, 200);
+
+            function hidePreloader() {
+                const elapsed = Date.now() - startTime;
+                const remaining = Math.max(0, minTime - elapsed);
+                setTimeout(() => {
+                    clearInterval(progressInterval);
+                    if (progressBar) progressBar.style.width = '100%';
+                    setTimeout(() => {
+                        preloader.classList.add('hidden');
+                        body.classList.remove('loading');
+                        setTimeout(() => preloader.remove(), 800);
+                    }, 300);
+                }, remaining);
+            }
+
+            if (document.readyState === 'complete') hidePreloader();
+            else window.addEventListener('load', hidePreloader);
+            setTimeout(hidePreloader, 5000);
+        })();
+
+        renderProducts();
