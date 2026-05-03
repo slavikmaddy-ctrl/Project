@@ -116,7 +116,6 @@
             </div>
         </nav>
 
-        <!-- Content -->
         <div class="absolute inset-0 flex flex-col items-center justify-center text-white z-10 px-4">
             <h1 class="text-6xl md:text-8xl font-black tracking-tighter mb-2 text-center uppercase animate-pulse">
                 EMPIRE
@@ -165,7 +164,6 @@
         </div>
 
         <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Products will be rendered by JS below -->
         </div>
     </section>
 
