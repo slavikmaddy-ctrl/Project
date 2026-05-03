@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина — EMPIRE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">            
+</head>
+<body class="bg-white text-black">
+    <div id="search-overlay" class="search-overlay">
+        <button id="close-search" class="absolute top-8 right-8 text-white">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <div class="w-full max-w-2xl px-8">
+            <input type="text" id="search-input" class="search-input" placeholder="Поиск товаров...">
+            <div id="search-results" class="mt-8 max-h-96 overflow-y-auto"></div>
+        </div>
+    </div>
+
+    <div class="bg-black text-white text-center py-2 text-xs tracking-widest uppercase font-medium">
+        СКИДКА 10% — КОД: EMPIRE10
+    </div>
+
+    <nav class="sticky top-0 z-50 bg-white border-b border-gray-200 px-8 py-4">
+        <div class="max-w-[1400px] mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-8">
+                <a href="index.html" class="text-sm font-medium hover:opacity-70 transition">Главная</a>
+                <a href="shop.html" class="text-sm font-medium hover:opacity-70 transition">Каталог</a>
+                <a href="news.html" class="text-sm font-medium hover:opacity-70 transition">Новости</a>
+                <a href="contact.html" class="text-sm font-medium hover:opacity-70 transition">Контакты</a>
+            </div>
+            
+            <a href="index.html" class="absolute left-1/2 transform -translate-x-1/2">
+                <svg width="40" height="40" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+                </svg>
+            </a>
+
+            <div class="flex items-center gap-6">
+                <button id="search-btn" class="text-sm font-medium hover:opacity-70 transition">Поиск</button>
+                <a href="rent-out.html" class="text-sm font-bold border-b-2 border-black pb-1">Сдать вещь</a>
+                <a href="dashboard.html" class="text-sm font-medium hover:opacity-70 transition">Кабинет</a>
+                <a href="dashboard.html#points" class="flex items-center gap-2 px-3 py-1.5 rounded-full em-badge text-white text-sm font-medium hover:shadow-lg transition">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                    <span class="em-balance">0</span> EMB
+                </a>
+                <a href="cart.html" class="flex items-center gap-2 cursor-pointer">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="text-sm font-bold" id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="py-12 px-8 max-w-[1400px] mx-auto min-h-[60vh]">
+        <h1 class="text-6xl md:text-8xl font-black tracking-tighter uppercase mb-12">Корзина</h1>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <div class="lg:col-span-2">
+                <div id="cart-items" class="space-y-4">
+                    <!-- Items rendered by JS -->
+                </div>
+                
+                <div id="cart-empty" class="empty-state hidden">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="mx-auto mb-4">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <p class="text-gray-500 mb-4 text-lg">Ваша корзина пуста</p>
+                    <a href="shop.html" class="inline-block bg-black text-white px-8 py-3 rounded-full font-semibold hover:bg-gray-800 transition">Начать покупки</a>
+                </div>
+
+                <a href="shop.html" class="inline-flex items-center gap-2 text-sm font-semibold hover:opacity-70 transition mt-8">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    Продолжить покупки
+                </a>
+            </div>
+
+            <div class="summary-card h-fit">
+                <h2 class="text-xl font-bold mb-6 uppercase tracking-tight">Итого</h2>
+                
+                <div class="space-y-4 mb-6">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Подытог</span>
+                        <span class="font-semibold" id="cart-subtotal">$0.00</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Доставка</span>
+                        <span class="font-semibold text-gray-400">Рассчитается при оформлении</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Налог (10%)</span>
+                        <span class="font-semibold" id="cart-tax">$0.00</span>
+                    </div>
+                    <div id="discount-row" class="flex justify-between text-sm hidden">
+                        <span class="text-gray-600">Скидка EM Points</span>
+                        <span class="font-semibold text-red-600" id="cart-discount">-$0.00</span>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-200 pt-4 mb-6">
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-lg">Итого</span>
+                        <span class="font-black text-2xl" id="cart-total">$0.00</span>
+                    </div>
+                </div>
+
+                <div class="em-points-card mb-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-2">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="#dc2626">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                            </svg>
+                            <span class="font-semibold">Empire Баллы</span>
+                            <span class="text-sm text-gray-500">(<span class="em-balance">0</span> доступно)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3">
+                            <input type="range" id="em-slider" min="0" max="0" value="0" 
+                                   class="em-slider flex-1">
+                            <div class="w-20 text-right">
+                                <input type="number" id="em-input" min="0" value="0" 
+                                       class="w-full px-2 py-1 text-center rounded border border-gray-300 text-sm font-semibold">
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Скидка:</span>
+                            <span class="font-bold text-red-600" id="em-discount">-$0.00</span>
+                        </div>
+                        
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Итого с учётом EMB:</span>
+                            <span class="font-bold text-lg" id="em-final-total">$0.00</span>
+                        </div>
+                        
+                        <button type="button" id="apply-em-btn" class="w-full py-2.5 bg-red-600 text-white rounded-full font-medium hover:bg-red-700 transition text-sm">
+                            Применить баллы
+                        </button>
+                    </div>
+                </div>
+
+                <button id="checkout-btn" class="checkout-btn mb-4">
+                    Оформить заказ
+                </button>
+
+                <div class="flex justify-center gap-2 opacity-50">
+                    <div class="bg-white rounded px-2 py-1 border"><span class="text-black text-xs font-bold">VISA</span></div>
+                    <div class="bg-white rounded px-2 py-1 border"><span class="text-black text-xs font-bold">MC</span></div>
+                    <div class="bg-white rounded px-2 py-1 border"><span class="text-black text-xs font-bold">Stripe</span></div>
+                    <div class="bg-white rounded px-2 py-1 border"><span class="text-black text-xs font-bold">PayPal</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="bg-black text-white py-4 overflow-hidden border-b border-gray-800">
+        <div class="marquee whitespace-nowrap">
+            <span class="text-sm font-bold tracking-widest mx-8">100% НЕЗАВИСИМОСТЬ</span>
+            <span class="mx-4">
+                <svg width="20" height="20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" class="inline">
+                    <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+                </svg>
+            </span>
+            <span class="text-sm font-bold tracking-widest mx-8">100% НЕЗАВИСИМОСТЬ</span>
+            <span class="mx-4">
+                <svg width="20" height="20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" class="inline">
+                    <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+                </svg>
+            </span>
+            <span class="text-sm font-bold tracking-widest mx-8">100% НЕЗАВИСИМОСТЬ</span>
+            <span class="mx-4">
+                <svg width="20" height="20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" class="inline">
+                    <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+                </svg>
+            </span>
+            <span class="text-sm font-bold tracking-widest mx-8">100% НЕЗАВИСИМОСТЬ</span>
+            <span class="mx-4">
+                <svg width="20" height="20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" class="inline">
+                    <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+                </svg>
+            </span>
+        </div>
+    </div>
+
+    <footer class="bg-black text-white py-16 px-8">
+        <div class="max-w-[1400px] mx-auto text-center">
+            <svg width="50" height="50" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" class="mx-auto mb-4">
+                <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+            </svg>
+            <p class="text-xs text-gray-400">© 2025 EMPIRE DISTRIBUTION</p>
+        </div>
+    </footer>
+
+    <div id="toast-container"></div>
+    <script src="main.js"></script>
+</body>
+</html>
+
+Style:
+        * { font-family: 'Inter', sans-serif; }
+        body { overflow-x: hidden; }
+        
+        .search-overlay {
+            position: fixed; inset: 0; z-index: 100;
+            background: rgba(0,0,0,0.95); backdrop-filter: blur(20px);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; transition: all 0.4s;
+        }
+        .search-overlay.active { opacity: 1; visibility: visible; }
+        .search-input {
+            width: 100%; background: transparent; border: none;
+            border-bottom: 2px solid white; color: white;
+            font-size: 2rem; font-weight: 300; padding: 1rem 0; outline: none;
+        }
+        .search-input::placeholder { color: #666; }
+        
+        .cart-item {
+            display: flex; gap: 1.5rem; padding: 1.5rem;
+            background: white; border-radius: 1rem;
+            border: 1px solid #e5e7eb; transition: all 0.2s;
+        }
+        .cart-item:hover { border-color: #d1d5db; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        
+        .qty-btn {
+            width: 36px; height: 36px; border-radius: 50%;
+            border: 1px solid #e5e7eb; background: white;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-size: 1.125rem; font-weight: 600;
+            transition: all 0.2s; color: #374151;
+        }
+        .qty-btn:hover { background: #f3f4f6; border-color: #d1d5db; }
+        .qty-btn:active { transform: scale(0.95); }
+        .qty-value {
+            width: 40px; text-align: center; font-weight: 700; font-size: 1rem;
+        }
+        
+        .rental-select {
+            appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 0.75rem center;
+            padding-right: 2.5rem;
+        }
+        
+        .remove-btn {
+            color: #9ca3af; cursor: pointer; padding: 0.5rem;
+            border-radius: 0.5rem; transition: all 0.2s;
+            background: none; border: none;
+        }
+        .remove-btn:hover { color: #dc2626; background: #fef2f2; }
+        
+        .empty-state {
+            text-align: center; padding: 4rem 2rem;
+        }
+        .empty-state svg { color: #d1d5db; margin-bottom: 1rem; }
+        
+        .summary-card {
+            background: #f9fafb; border-radius: 1.5rem; padding: 2rem;
+            position: sticky; top: 6rem;
+        }
+        
+        .em-points-card {
+            background: linear-gradient(135deg, #fef2f2 0%, #fff7ed 100%);
+            border: 1px solid #fecaca; border-radius: 1rem; padding: 1.25rem;
+        }
+        .em-slider {
+            -webkit-appearance: none; appearance: none;
+            width: 100%; height: 8px; border-radius: 4px;
+            background: #e5e7eb; outline: none;
+        }
+        .em-slider::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none;
+            width: 20px; height: 20px; border-radius: 50%;
+            background: #dc2626; cursor: pointer; border: 3px solid white;
+            box-shadow: 0 2px 6px rgba(220,38,38,0.3);
+        }
+        .em-slider::-moz-range-thumb {
+            width: 20px; height: 20px; border-radius: 50%;
+            background: #dc2626; cursor: pointer; border: 3px solid white;
+            box-shadow: 0 2px 6px rgba(220,38,38,0.3);
+        }
+        
+        .checkout-btn {
+            background: #000; color: white; width: 100%;
+            padding: 1rem; border-radius: 9999px;
+            font-weight: 600; font-size: 1.125rem;
+            transition: all 0.2s; border: none; cursor: pointer;
+        }
+        .checkout-btn:hover { background: #374151; }
+        .checkout-btn:active { transform: scale(0.98); }
+        .checkout-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .marquee { animation: marquee 20s linear infinite; }
+        
+        .toast {
+            position: fixed; bottom: 2rem; left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #000; color: #fff; padding: 1rem 2rem;
+            border-radius: 9999px; font-weight: 500; z-index: 200;
+            opacity: 0; transition: all 0.4s;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .toast.success { background: #16a34a; }
+        .toast.error { background: #dc2626; }
+        
+        .em-badge {
+            background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+        }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { animation: fadeIn 0.3s ease-out; }
+        
+        @keyframes slideOut {
+            to { opacity: 0; transform: translateX(-100%); max-height: 0; margin: 0; padding: 0; }
+        }
+        .slide-out { animation: slideOut 0.4s ease-in forwards; }
+
+JS:
+const products = [
+            { id: 1, name: "EMPIRE x New Era 9FORTY Красный Снепбек", price: 45, image: "https://n.cdn.cdek.shopping/images/shopping/jZJ5x20CqdKT7efe.jpg?v=1", category: "accessories" },
+            { id: 2, name: "EMPIRE 1M Худи Чёрный", price: 80, image: "https://adaptclothing.com/cdn/shop/products/Zoom_2a6f3286-fc1e-44f3-bb26-d2410817976c_1024x1024.jpg", category: "clothing" },
+            { id: 3, name: "EMPIRE 1M Футболка Чёрная", price: 40, image: "https://gd1.alicdn.com/bao/uploaded/i1/749431973/TB2l9avipXXXXawXpXXXXXXXXXX_!!749431973.jpg", category: "clothing" },
+            { id: 4, name: "EMPIRE x Starter Парка Чёрная/Белая", price: 175, image: "https://n.cdn.cdek.shopping/images/shopping/WUgGkcE1wC0U2x0k.jpg?v=1", category: "clothing" },
+            { id: 5, name: "EMPIRE x Starter Парка Белая/Чёрная", price: 175, image: "https://n.cdn.cdek.shopping/images/shopping/FeZMJLzGRLkFvyil.webp?v=1", category: "clothing" },
+            { id: 6, name: "EMPIRE Футболка с Логотипом Белая", price: 35, image: "https://img-edg.joomcdn.net/bd3f9ebcd57461aa4fb2b4f9d73084528cdcee44_original.jpeg", category: "clothing" },
+            { id: 7, name: "EMPIRE Лонгслив Чёрный", price: 45, image: "https://avatars.mds.yandex.net/get-mpic/5212780/img_id1678074573524565973.jpeg/orig", category: "clothing" },
+            { id: 8, name: "EMPIRE Шапка Бини Чёрная", price: 20, image: "https://a.lmcdn.ru/product/M/P/MP002XU016PH_31077361_5_v2_2x.jpg", category: "accessories" },
+            { id: 9, name: "EMPIRE Винил Wizkid 'Real'", price: 35, image: "https://i.ytimg.com/vi/sCBNlK2HVww/maxresdefault.jpg", category: "music" },
+            { id: 10, name: "EMPIRE CD Бандл", price: 50, image: "https://cdn1.ozone.ru/s3/multimedia-1-b/7102006643.jpg", category: "music" },
+            { id: 11, name: "EMPIRE x New Era Чёрный Снепбек", price: 45, image: "https://a.lmcdn.ru/img600x866/M/P/MP002XM09LV9_15739750_9_v1_2x.jpg", category: "accessories" },
+            { id: 12, name: "EMPIRE Носки 3 пары", price: 25, image: "https://n.cdn.cdek.shopping/images/shopping/inEZKdAIiwEqOtiO.jpg?v=1", category: "accessories" }
+        ];
+
+        const rentalPeriods = [
+            { label: "1 день", days: 1, discount: 0 },
+            { label: "3 дня", days: 3, discount: 0.10 },
+            { label: "7 дней", days: 7, discount: 0.20 },
+            { label: "14 дней", days: 14, discount: 0.30 },
+            { label: "30 дней", days: 30, discount: 0.35 }
+        ];
+
+        let cart = JSON.parse(localStorage.getItem('empire_cart') || '[]');
+        let emPointsUsed = 0;
+        let emDiscountApplied = 0;
+
+        function initDemoCart() {
+            if (cart.length === 0) {
+                cart = [
+                    { id: 2, quantity: 1, period: 1 },
+                    { id: 9, quantity: 1, period: 2 },
+                    { id: 8, quantity: 2, period: 0 }
+                ];
+                saveCart();
+            }
+        }
+
+        function saveCart() {
+            localStorage.setItem('empire_cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+            const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = total;
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cart-items');
+            const emptyState = document.getElementById('cart-empty');
+
+            if (cart.length === 0) {
+                container.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                updateSummary();
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+
+            container.innerHTML = cart.map((item, index) => {
+                const product = products.find(p => p.id === item.id);
+                if (!product) return '';
+                const period = rentalPeriods[item.period];
+                const baseTotal = product.price * period.days * item.quantity;
+                const discount = baseTotal * period.discount;
+                const finalPrice = baseTotal - discount;
+
+                return `
+                    <div class="cart-item fade-in" data-index="${index}">
+                        <div class="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover"
+                                 onerror="this.src='https://via.placeholder.com/96x96/f3f4f6/000000?text=EMPIRE'">
+                        </div>
+                        
+                        <div class="flex-1 min-w-0">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-semibold text-sm truncate pr-4">${product.name}</h3>
+                                <button class="remove-btn" onclick="removeItem(${index})" title="Удалить">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <p class="text-gray-500 text-sm mb-3">$${product.price} / день</p>
+                            
+                            <div class="mb-3">
+                                <label class="text-xs text-gray-400 uppercase tracking-wider font-medium">Срок аренды</label>
+                                <select class="rental-select w-full mt-1 px-3 py-2 rounded-lg border border-gray-200 text-sm font-medium focus:border-black focus:outline-none bg-white"
+                                        onchange="changePeriod(${index}, this.value)">
+                                    ${rentalPeriods.map((p, i) => `
+                                        <option value="${i}" ${i === item.period ? 'selected' : ''}>
+                                            ${p.label} — $${Math.round(product.price * p.days * (1 - p.discount))}
+                                            ${p.discount > 0 ? ` (экономия ${Math.round(p.discount * 100)}%)` : ''}
+                                        </option>
+                                    `).join('')}
+                                </select>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-xs text-gray-400 uppercase tracking-wider font-medium mr-2">Кол-во</span>
+                                    <button class="qty-btn" onclick="changeQty(${index}, -1)">−</button>
+                                    <span class="qty-value">${item.quantity}</span>
+                                    <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+                                </div>
+                                
+                                <div class="text-right">
+                                    ${period.discount > 0 ? `<div class="text-xs text-gray-400 line-through">$${baseTotal.toFixed(2)}</div>` : ''}
+                                    <div class="font-bold text-lg">$${finalPrice.toFixed(2)}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            updateSummary();
+        }
+
+        window.changeQty = (index, delta) => {
+            cart[index].quantity = Math.max(1, cart[index].quantity + delta);
+            saveCart();
+            renderCart();
+        };
+
+        window.changePeriod = (index, periodIndex) => {
+            cart[index].period = parseInt(periodIndex);
+            saveCart();
+            renderCart();
+            showToast('Срок аренды обновлён', 'success');
+        };
+
+        window.removeItem = (index) => {
+            const item = document.querySelector(`[data-index="${index}"]`);
+            item.classList.add('slide-out');
+            setTimeout(() => {
+                cart.splice(index, 1);
+                saveCart();
+                renderCart();
+                showToast('Товар удалён из корзины', 'success');
+            }, 400);
+        };
+
+        function updateSummary() {
+            let subtotal = 0;
+            let totalDiscount = 0;
+
+            cart.forEach(item => {
+                const product = products.find(p => p.id === item.id);
+                if (!product) return;
+                const period = rentalPeriods[item.period];
+                const base = product.price * period.days * item.quantity;
+                subtotal += base;
+                totalDiscount += base * period.discount;
+            });
+
+            const tax = subtotal * 0.10;
+            let total = subtotal + tax - totalDiscount - emDiscountApplied;
+            if (total < 0) total = 0;
+
+            document.getElementById('cart-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('cart-tax').textContent = `$${tax.toFixed(2)}`;
+            document.getElementById('cart-total').textContent = `$${total.toFixed(2)}`;
+
+            const discountRow = document.getElementById('discount-row');
+            if (emDiscountApplied > 0) {
+                discountRow.classList.remove('hidden');
+                document.getElementById('cart-discount').textContent = `-$${emDiscountApplied.toFixed(2)}`;
+            } else {
+                discountRow.classList.add('hidden');
+            }
+
+            // Update EM Points
+            updateEMPoints(subtotal + tax - totalDiscount);
+        }
+
+        function getEMPoints() {
+            return JSON.parse(localStorage.getItem('empire_em_points') || '{"balance": 500, "totalEarned": 500, "totalSpent": 0, "history": []}');
+        }
+
+        function saveEMPoints(points) {
+            localStorage.setItem('empire_em_points', JSON.stringify(points));
+            document.querySelectorAll('.em-balance').forEach(el => el.textContent = points.balance);
+        }
+
+        function updateEMPoints(orderTotal) {
+            const points = getEMPoints();
+            document.querySelectorAll('.em-balance').forEach(el => el.textContent = points.balance);
+
+            const maxDiscount = orderTotal * 0.5;
+            const maxPoints = Math.min(points.balance, Math.ceil(maxDiscount * 10));
+
+            const slider = document.getElementById('em-slider');
+            const input = document.getElementById('em-input');
+            
+            slider.max = maxPoints;
+            input.max = maxPoints;
+            
+            if (parseInt(slider.value) > maxPoints) {
+                slider.value = maxPoints;
+                input.value = maxPoints;
+            }
+
+            updateEMDiscount();
+        }
+
+        function updateEMDiscount() {
+            const slider = document.getElementById('em-slider');
+            const input = document.getElementById('em-input');
+            const points = parseInt(slider.value) || 0;
+            const discount = points / 10;
+
+            input.value = points;
+            document.getElementById('em-discount').textContent = `-$${discount.toFixed(2)}`;
+
+            let subtotal = 0;
+            let totalDiscount = 0;
+            cart.forEach(item => {
+                const product = products.find(p => p.id === item.id);
+                if (!product) return;
+                const period = rentalPeriods[item.period];
+                const base = product.price * period.days * item.quantity;
+                subtotal += base;
+                totalDiscount += base * period.discount;
+            });
+            const tax = subtotal * 0.10;
+            const total = Math.max(0, subtotal + tax - totalDiscount - discount);
+            
+            document.getElementById('em-final-total').textContent = `$${total.toFixed(2)}`;
+            
+            return { points, discount };
+        }
+
+        document.getElementById('em-slider').addEventListener('input', updateEMDiscount);
+        document.getElementById('em-input').addEventListener('change', function() {
+            let val = parseInt(this.value) || 0;
+            const slider = document.getElementById('em-slider');
+            val = Math.max(0, Math.min(val, slider.max));
+            slider.value = val;
+            updateEMDiscount();
+        });
+
+        document.getElementById('apply-em-btn').addEventListener('click', function() {
+            const { points, discount } = updateEMDiscount();
+            if (points > 0) {
+                const emPoints = getEMPoints();
+                if (emPoints.balance >= points) {
+                    emPoints.balance -= points;
+                    emPoints.totalSpent += points;
+                    emPoints.history.push({
+                        type: 'spend', amount: points, reason: 'Скидка на заказ',
+                        date: new Date().toISOString()
+                    });
+                    saveEMPoints(emPoints);
+                    emPointsUsed = points;
+                    emDiscountApplied = discount;
+                    updateSummary();
+                    this.disabled = true;
+                    this.textContent = 'Применено ✓';
+                    this.classList.add('bg-green-600');
+                    showToast(`Скидка $${discount.toFixed(2)} применена!`, 'success');
+                } else {
+                    showToast('Недостаточно баллов', 'error');
+                }
+            }
+        });
+
+        document.getElementById('checkout-btn').addEventListener('click', function() {
+            if (cart.length === 0) {
+                showToast('Корзина пуста', 'error');
+                return;
+            }
+            this.disabled = true;
+            this.textContent = 'Оформление...';
+            setTimeout(() => {
+                showToast('Заказ оформлен! Перенаправление...', 'success');
+                setTimeout(() => {
+                    const emPoints = getEMPoints();
+                    const earned = Math.floor(cart.reduce((sum, item) => {
+                        const product = products.find(p => p.id === item.id);
+                        const period = rentalPeriods[item.period];
+                        return sum + (product.price * period.days * item.quantity * (1 - period.discount));
+                    }, 0) * 0.1);
+                    emPoints.balance += earned;
+                    emPoints.totalEarned += earned;
+                    emPoints.history.push({
+                        type: 'earn', amount: earned, reason: 'Заказ в корзине',
+                        date: new Date().toISOString()
+                    });
+                    saveEMPoints(emPoints);
+                    
+                    cart = [];
+                    saveCart();
+                    renderCart();
+                    this.disabled = false;
+                    this.textContent = 'Оформить заказ';
+                }, 1500);
+            }, 1000);
+        });
+
+        const searchOverlay = document.getElementById('search-overlay');
+        document.getElementById('search-btn').addEventListener('click', () => {
+            searchOverlay.classList.add('active');
+            document.getElementById('search-input').focus();
+        });
+        document.getElementById('close-search').addEventListener('click', () => {
+            searchOverlay.classList.remove('active');
+        });
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const results = document.getElementById('search-results');
+            if (!query) { results.innerHTML = ''; return; }
+            const found = products.filter(p => p.name.toLowerCase().includes(query));
+            results.innerHTML = found.length ? found.map(p => `
+                <a href="product.html?id=${p.id}" class="flex items-center gap-4 p-4 hover:bg-white/10 rounded-lg transition">
+                    <img src="${p.image}" class="w-12 h-12 rounded object-cover">
+                    <div><div class="text-white font-medium">${p.name}</div><div class="text-gray-400 text-sm">$${p.price}/день</div></div>
+                </a>
+            `).join('') : '<p class="text-gray-400 text-center">Ничего не найдено</p>';
+        });
+
+        function showToast(message, type = '') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.add('show'), 10);
+            setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 400); }, 3000);
+        }
+        window.showToast = showToast;
+
+        initDemoCart();
+        renderCart();
+        updateCartCount();
+        saveEMPoints(getEMPoints());
+
