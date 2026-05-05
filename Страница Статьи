@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article — EMPIRE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-white text-black">
+
+    <div id="search-overlay" class="search-overlay">
+        <button id="close-search" class="absolute top-8 right-8 text-white">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <div class="w-full max-w-2xl">
+            <input type="text" id="search-input" class="search-input" placeholder="Search...">
+            <div id="search-results" class="mt-8 max-h-96 overflow-y-auto"></div>
+        </div>
+    </div>
+
+    <div class="bg-black text-white text-center py-2 text-xs tracking-widest uppercase font-medium">
+        GET 10% OFF — USE CODE: EMPIRE10
+    </div>
+
+    <nav class="sticky top-0 z-50 bg-white border-b border-gray-200 px-8 py-4">
+        <div class="max-w-[1400px] mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-8">
+                <a href="index.html" class="text-sm font-medium hover:opacity-70 transition">Главная</a>
+                <a href="shop.html" class="text-sm font-medium hover:opacity-70 transition">Каталог</a>
+                <a href="news.html" class="text-sm font-bold border-b-2 border-black pb-1">Новости</a>
+                <a href="contact.html" class="text-sm font-medium hover:opacity-70 transition">Контакты</a>
+            </div>
+            
+            <a href="index.html" class="absolute left-1/2 transform -translate-x-1/2">
+                <svg width="40" height="40" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+                </svg>
+            </a>
+
+            <div class="flex items-center gap-6">
+                <button id="search-btn" class="text-sm font-medium hover:opacity-70 transition">Поиск</button>
+                <a href="rent-out.html" class="text-sm font-bold border-b-2 border-black pb-1">Сдать вещь</a>
+                <a href="dashboard.html" class="text-sm font-medium hover:opacity-70 transition">Кабинет</a>
+                <a href="dashboard.html#points" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-red-600 to-red-500 text-white text-sm font-medium hover:shadow-lg transition">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                    <span class="em-balance">0</span> EMB
+                </a>
+                <a href="cart.html" class="flex items-center gap-2 cursor-pointer hover:opacity-70 transition">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="text-sm" id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <article class="max-w-4xl mx-auto px-8 py-12">
+        <div class="text-center mb-12">
+            <span id="article-category" class="inline-block bg-black text-white text-xs font-bold px-4 py-2 rounded-full uppercase tracking-wider mb-6">New Artist</span>
+            <h1 id="article-title" class="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-6">Bebe Rexha Strikes Partnership With EMPIRE</h1>
+            <div class="flex items-center justify-center gap-4 text-sm text-gray-500">
+                <span id="article-date">January 15, 2025</span>
+                <span>•</span>
+                <span>5 min read</span>
+            </div>
+        </div>
+
+        <div class="rounded-2xl overflow-hidden mb-12 aspect-[16/9]">
+            <img id="article-image" src="https://images.unsplash.com/photo-1516280440614-6697288d5d38?w=1200&h=675&fit=crop" class="w-full h-full object-cover">
+        </div>
+
+        <div class="article-content text-lg">
+            <p class="font-semibold text-black text-xl">
+                Four-time Grammy-nominated pop artist and singer-songwriter Bebe Rexha has gone indie and entered a partnership with powerhouse Bay Area-based label and distributor EMPIRE.
+            </p>
+
+            <p>
+                The deal marks a significant moment for both artists and the independent music landscape. Rexha, known for hits like "Meant to Be" and "I'm Good (Blue)," brings her massive commercial appeal to the independent sector, proving that major success doesn't require a major label.
+            </p>
+
+            <h2>A New Chapter</h2>
+            <p>
+                "I've always believed in the power of independence," Rexha said in a statement. "EMPIRE understands my vision and gives me the freedom to create on my own terms while providing the infrastructure to reach a global audience."
+            </p>
+
+            <p>
+                The partnership will see EMPIRE handling distribution, marketing, and publishing for Rexha's future releases, while the artist maintains ownership of her masters and creative control.
+            </p>
+
+            <div class="bg-gray-100 rounded-xl p-8 my-8 border-l-4 border-black">
+                <p class="italic text-gray-700 mb-4">"Bebe is a game-changer. Her decision to go independent sends a powerful message to the industry."</p>
+                <p class="font-bold text-sm">— Ghazi Shami, CEO of EMPIRE</p>
+            </div>
+
+            <h2>The EMPIRE Model</h2>
+            <p>
+                EMPIRE has built a reputation as one of the most successful independent labels in the world, with a roster that includes Tyga, Fireboy DML, and K Camp. Their artist-friendly approach has disrupted traditional label structures.
+            </p>
+
+            <p>
+                The company offers transparent royalty splits, faster payment cycles, and retains none of the artist's masters—an increasingly attractive proposition in today's music economy.
+            </p>
+
+            <h2>What's Next</h2>
+            <p>
+                Rexha is expected to release her first single under the EMPIRE banner in early 2025, with a full album to follow. The announcement has already generated significant buzz across social media platforms.
+            </p>
+
+            <p>
+                For EMPIRE, landing an artist of Rexha's caliber represents another major victory in their mission to prove that independence is not just viable—it's preferable.
+            </p>
+        </div>
+
+        <div class="border-t border-gray-200 pt-8 mt-12">
+            <p class="text-sm font-semibold uppercase tracking-wider mb-4">Share this article</p>
+            <div class="flex gap-3">
+                <button class="share-btn w-10 h-10 rounded-full bg-black text-white flex items-center justify-center" onclick="window.open('https://twitter.com/intent/tweet', '_blank')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.223-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                </button>
+                <button class="share-btn w-10 h-10 rounded-full bg-black text-white flex items-center justify-center" onclick="window.open('https://facebook.com/sharer', '_blank')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+                </button>
+                <button class="share-btn w-10 h-10 rounded-full bg-black text-white flex items-center justify-center" onclick="window.open('https://linkedin.com/share', '_blank')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/></svg>
+                </button>
+                <button class="share-btn w-10 h-10 rounded-full bg-black text-white flex items-center justify-center" onclick="navigator.clipboard.writeText(window.location.href); showToast('Link copied!')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </article>
+
+    <section class="bg-gray-50 py-16 px-8">
+        <div class="max-w-[1400px] mx-auto">
+            <h2 class="text-3xl font-black tracking-tighter uppercase mb-8">MORE NEWS</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="cursor-pointer group" onclick="window.location.href='article.html?id=2'">
+                    <div class="rounded-xl overflow-hidden aspect-[4/3] mb-4">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition">
+                    </div>
+                    <h3 class="font-bold mb-2">The Bay's All-Star: How EMPIRE's Ghazi...</h3>
+                    <p class="text-sm text-gray-500">January 12, 2025</p>
+                </div>
+                <div class="cursor-pointer group" onclick="window.location.href='article.html?id=3'">
+                    <div class="rounded-xl overflow-hidden aspect-[4/3] mb-4">
+                        <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=400&h=300&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition">
+                    </div>
+                    <h3 class="font-bold mb-2">Wizkid & Asake Drop 'Real'</h3>
+                    <p class="text-sm text-gray-500">January 10, 2025</p>
+                </div>
+                <div class="cursor-pointer group" onclick="window.location.href='article.html?id=4'">
+                    <div class="rounded-xl overflow-hidden aspect-[4/3] mb-4">
+                        <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition">
+                    </div>
+                    <h3 class="font-bold mb-2">Fresh Signings: Meet EMPIRE's Roster</h3>
+                    <p class="text-sm text-gray-500">January 8, 2025</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="bg-black text-white py-4 overflow-hidden border-b border-gray-800">
+        <div class="marquee whitespace-nowrap">
+            <span class="text-sm font-bold tracking-widest mx-8">100% INDEPENDENT</span>
+            <span class="mx-4">
+                <svg width="20" height="20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" class="inline">
+                    <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+                </svg>
+            </span>
+        </div>
+    </div>
+
+    <footer class="bg-black text-white py-16 px-8">
+        <div class="max-w-[1400px] mx-auto text-center">
+            <svg width="50" height="50" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" class="mx-auto mb-4">
+                <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+            </svg>
+            <p class="text-xs text-gray-400">© 2025 EMPIRE DISTRIBUTION</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</body>
+</html>
+
+Стили: 
+.thumb {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+    opacity: 0.5;
+}
+
+.thumb:hover,
+.thumb.active {
+    opacity: 1;
+    border-color: black;
+}
+
+.size-btn {
+    transition: all 0.3s ease;
+}
+
+.size-btn:hover,
+.size-btn.active {
+    background: black;
+    color: white;
+    border-color: black;
+}
+
+.size-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.color-btn {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.color-btn:hover {
+    transform: scale(1.1);
+}
+
+.color-btn.ring-2 {
+    box-shadow: 0 0 0 2px white, 0 0 0 4px black;
+}
+
+.rental-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+}
+
+.add-to-cart {
+    transition: all 0.3s ease;
+}
+
+.add-to-cart:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.add-to-cart.added {
+    background: #16a34a !important;
+}
+
+.timeline-pulse {
+    animation: timelinePulse 2s infinite;
+}
+
+@keyframes timelinePulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+    50% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+}
+
+.condition-bar {
+    height: 8px;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.condition-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+.trust-badge {
+    background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+}
+
+.location-dot {
+    position: relative;
+}
+
+.location-dot::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    opacity: 0.3;
+    animation: ripple 2s infinite;
+}
+
+@keyframes ripple {
+    0% { transform: scale(1); opacity: 0.3; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+
+
+.product-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05);
+}
+
+.product-image {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.marquee {
+    display: flex;
+    animation: marquee 20s linear infinite;
+}
+
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.search-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    z-index: 100;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 15vh;
+}
+
+.search-overlay.active {
+    display: flex;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 600px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid white;
+    color: white;
+    font-size: 2rem;
+    padding: 1rem;
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: rgba(255,255,255,0.5);
+}
+
+.badge {
+    backdrop-filter: blur(10px);
+}
+
+img {
+    background: #f3f4f6;
+}
+
+JS:
+function loadArticle() {
+    const params = new URLSearchParams(window.location.search);
+    const id = parseInt(params.get('id')) || 1;
+
+    const article = store.news.find(n => n.id === id) || store.news[0];
+
+    document.title = `${article.title} — EMPIRE`;
+
+    const titleEl = document.getElementById('article-title');
+    const imageEl = document.getElementById('article-image');
+    const dateEl = document.getElementById('article-date');
+    const categoryEl = document.getElementById('article-category');
+
+    if (titleEl) titleEl.textContent = article.title;
+    if (imageEl) {
+        imageEl.src = PlaceholderGenerator.generate(1200, 675, 'EMPIRE');
+        imageEl.setAttribute('data-src', article.image);
+        imageEl.width = 1200;
+        imageEl.height = 675;
+        imageEl.onerror = function() { 
+            this.onerror = null;
+            this.src = PlaceholderGenerator.generateError(1200, 675); 
+        };
+    }
+    if (dateEl) dateEl.textContent = article.date;
+    if (categoryEl) categoryEl.textContent = article.category;
+
+    refreshLazyLoading();
+}
+
+news: [
+    { 
+        id: 1, 
+        title: "Bebe Rexha заключила партнёрство с EMPIRE", 
+        excerpt: "Четырёхкратная номинантка на Грэмми поп-исполнительница и автор песен Bebe Rexha стала независимым артистом...", 
+        image: "https://s.yimg.com/ny/api/res/1.2/O_V_VKcqL40.6Q0Ah2JzrQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDQ7Y2Y9d2VicA--/https://media.zenfs.com/en/wwd_409/f4d5c4e9402f06466cfc2c6701309fbf", 
+        category: "Новый артист", 
+        date: "15 января 2025", 
+        featured: true 
+    },
+    { 
+        id: 2, 
+        title: "Звезда Залива: Как Гази из EMPIRE привёл музыкальный бизнес в Сан-Франциско", 
+        excerpt: "Гази из EMPIRE рассказывает о любви к Сан-Франциско, успехах в музыкальном бизнесе...", 
+        image: "https://www.billboard.com/wp-content/uploads/2025/02/cover-ghazi-billboard-2025-bb03-austin-hargrave-3-1260.jpg", 
+        category: "Интервью", 
+        date: "12 января 2025" 
+    },
+]
