@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Товар — EMPIRE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-white text-black">
+
+    <div id="search-overlay" class="search-overlay">
+        <button id="close-search" class="absolute top-8 right-8 text-white">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <div class="w-full max-w-2xl">
+            <input type="text" id="search-input" class="search-input" placeholder="Поиск товаров...">
+            <div id="search-results" class="mt-8 max-h-96 overflow-y-auto"></div>
+        </div>
+    </div>
+
+    <div class="bg-black text-white text-center py-2 text-xs tracking-widest uppercase font-medium">
+        СКИДКА 10% — КОД: EMPIRE10
+    </div>
+
+    <nav class="sticky top-0 z-50 bg-white border-b border-gray-200 px-8 py-4">
+        <div class="max-w-[1400px] mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-8">
+                <a href="index.html" class="text-sm font-medium hover:opacity-70 transition">Главная</a>
+                <a href="shop.html" class="text-sm font-bold border-b-2 border-black pb-1">Каталог</a>
+                <a href="news.html" class="text-sm font-medium hover:opacity-70 transition">Новости</a>
+                <a href="contact.html" class="text-sm font-medium hover:opacity-70 transition">Контакты</a>
+            </div>
+            
+            <a href="index.html" class="absolute left-1/2 transform -translate-x-1/2">
+                <svg width="40" height="40" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+                </svg>
+            </a>
+
+            <div class="flex items-center gap-6">
+                <button id="search-btn" class="text-sm font-medium hover:opacity-70 transition">Поиск</button>
+                <a href="rent-out.html" class="text-sm font-bold border-b-2 border-black pb-1">Сдать вещь</a>
+                <a href="dashboard.html" class="text-sm font-medium hover:opacity-70 transition">Кабинет</a>
+<a href="dashboard.html#points" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-red-600 to-red-500 text-white text-sm font-medium hover:shadow-lg transition">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+    </svg>
+    <span class="em-balance">0</span> EMB
+</a>
+                <a href="cart.html" class="flex items-center gap-2 cursor-pointer hover:opacity-70 transition">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="text-sm" id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="py-12 px-8 max-w-[1400px] mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div class="flex gap-4">
+                <div class="flex flex-col gap-4 w-20">
+                    <div class="thumb active aspect-square bg-gray-100 rounded-lg overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=200&h=200&fit=crop" class="w-full h-full object-cover">
+                    </div>
+                    <div class="thumb aspect-square bg-gray-100 rounded-lg overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1578768079052-aa76e52ff62e?w=200&h=200&fit=crop" class="w-full h-full object-cover">
+                    </div>
+                    <div class="thumb aspect-square bg-gray-100 rounded-lg overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=200&h=200&fit=crop" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="flex-1 bg-gray-100 rounded-2xl overflow-hidden aspect-square">
+                    <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800&h=800&fit=crop" class="w-full h-full object-cover" id="main-image">
+                </div>
+            </div>
+
+            <div class="flex flex-col justify-center">
+                <div class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Худи</div>
+                <h1 id="product-name" class="text-4xl md:text-5xl font-black tracking-tighter uppercase mb-4">EMPIRE 1M Hoodie</h1>
+                <div class="flex items-baseline gap-2 mb-6">
+                    <p id="product-price" class="text-2xl font-semibold">$80.00</p>
+                    <span id="product-period" class="text-gray-500">/1 день</span>
+                </div>
+                
+                <p class="text-gray-600 mb-8 leading-relaxed">
+                    Премиальный хлопковый худи с культовым логотипом EMPIRE 1M. 
+                    Лимитированный дроп в честь 1 миллиона независимых артистов. 
+                    Свободный крой с карманом-кенгуру и манжетами в рубчик.
+                </p>
+
+                <div class="mb-6">
+                    <label class="text-sm font-semibold mb-3 block">Срок аренды</label>
+                    <select id="rental-period" class="rental-select w-full px-4 py-3 rounded-lg bg-white border border-gray-300 text-sm font-medium focus:border-black focus:outline-none">
+                        <option value="1 день" selected>1 день — $80</option>
+                        <option value="3 дня">3 дня — $216</option>
+                        <option value="7 дней">7 дней — $476</option>
+                        <option value="14 дней">14 дней — $896</option>
+                        <option value="30 дней">30 дней — $1680</option>
+                    </select>
+                    <p class="text-xs text-gray-500 mt-2">Скидка до 30% при долгосрочной аренде</p>
+                </div>
+
+                <div class="mb-6">
+                    <label class="text-sm font-semibold mb-3 block">Размер</label>
+                    <div class="flex gap-3 flex-wrap">
+                        <button class="size-btn w-12 h-12 rounded-full border border-gray-300 font-medium text-sm hover:border-black transition">S</button>
+                        <button class="size-btn w-12 h-12 rounded-full border border-gray-300 font-medium text-sm hover:border-black transition">M</button>
+                        <button class="size-btn active w-12 h-12 rounded-full border border-black font-medium text-sm bg-black text-white">L</button>
+                        <button class="size-btn w-12 h-12 rounded-full border border-gray-300 font-medium text-sm hover:border-black transition">XL</button>
+                        <button class="size-btn w-12 h-12 rounded-full border border-gray-300 font-medium text-sm hover:border-black transition">XXL</button>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <label class="text-sm font-semibold mb-3 block">Цвет</label>
+                    <div class="flex gap-3">
+                        <button class="color-btn w-10 h-10 rounded-full bg-black border-2 border-black ring-2 ring-offset-2 ring-black" title="Чёрный"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-gray-200 border-2 border-transparent hover:border-gray-400 transition" title="Серый"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-white border-2 border-gray-300 hover:border-gray-400 transition" title="Белый"></button>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 mb-8">
+                    <div class="flex items-center border border-gray-300 rounded-full px-4 py-3">
+                        <button class="text-lg font-medium px-2 hover:opacity-70" onclick="this.nextElementSibling.textContent = Math.max(1, parseInt(this.nextElementSibling.textContent) - 1)">−</button>
+                        <span class="mx-4 font-semibold w-8 text-center">1</span>
+                        <button class="text-lg font-medium px-2 hover:opacity-70" onclick="this.previousElementSibling.textContent = parseInt(this.previousElementSibling.textContent) + 1">+</button>
+                    </div>
+                    <button id="add-to-cart-btn" class="add-to-cart flex-1 bg-black text-white rounded-full font-semibold text-lg hover:bg-gray-800 transition">
+                        В корзину
+                    </button>
+                </div>
+
+                <div class="border-t border-gray-200 pt-6 space-y-4">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">Материал</span>
+                        <span class="font-medium">100% Хлопок</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">Крой</span>
+                        <span class="font-medium">Oversized</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">Доставка</span>
+                        <span class="font-medium">Бесплатно от $100</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section class="py-12 px-8 max-w-[1400px] mx-auto border-t">
+    <h2 class="text-3xl font-black tracking-tighter uppercase mb-8">История вещи</h2>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="space-y-6">
+            <!-- Live Status Card -->
+            <div class="bg-gradient-to-br from-black to-gray-900 text-white rounded-2xl p-6 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-red-600 rounded-full blur-3xl opacity-20"></div>
+                
+                <div class="relative">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="relative flex h-3 w-3">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                        </span>
+                        <span class="text-sm uppercase tracking-wider text-gray-400">Сейчас</span>
+                    </div>
+                    
+                    <div id="current-location" class="text-2xl font-bold mb-2">Загрузка...</div>
+                    <div id="current-condition" class="flex items-center gap-2 text-sm text-gray-300">
+                        <span>Состояние:</span>
+                        <span id="condition-badge" class="px-2 py-1 rounded bg-white/10">...</span>
+                    </div>
+                    
+                    <div class="mt-4 pt-4 border-t border-white/10">
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="text-gray-400">Доступна для аренды</span>
+                            <span id="availability-status" class="text-green-400">Да</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gray-50 rounded-2xl p-6">
+                <h3 class="font-bold mb-4">Статистика</h3>
+                <div class="space-y-3">
+                    <div class="flex justify-between">
+                        <span class="text-gray-500">Всего аренд</span>
+                        <span id="stat-rentals" class="font-bold">0</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-500">Дней в аренде</span>
+                        <span id="stat-days" class="font-bold">0</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-500">Рейтинг ухода</span>
+                        <span id="stat-rating" class="font-bold text-yellow-600">★ 5.0</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-500">Популярность</span>
+                        <span id="stat-popularity" class="px-2 py-0.5 rounded text-xs font-bold bg-gray-200">Низкая</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-green-50 border border-green-200 rounded-2xl p-6">
+                <div class="flex items-center gap-3 mb-2">
+                    <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="font-bold text-green-800">Verified Item</span>
+                </div>
+                <p class="text-sm text-green-700">
+                    Проверено экспертами EMPIRE. История отслеживания доступна с момента добавления.
+                </p>
+            </div>
+        </div>
+        
+        <div class="lg:col-span-2">
+            <div class="bg-white rounded-2xl border p-6">
+                <h3 class="font-bold mb-6">Хронология</h3>
+                
+                <div id="timeline-container" class="space-y-6 relative">
+                    <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-200"></div>
+                    
+                    <div class="text-center text-gray-500 py-8">Загрузка истории...</div>
+                </div>
+                
+                <button id="show-more-timeline" class="hidden w-full mt-6 py-3 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition">
+                    Показать всю историю
+                </button>
+            </div>
+            
+            <div class="mt-6 bg-gray-100 rounded-2xl p-6 h-64 flex items-center justify-center relative overflow-hidden">
+                <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23000000\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+                <div class="text-center">
+                    <div class="text-4xl mb-2">🗺️</div>
+                    <p class="text-gray-500">Интерактивная карта перемещений</p>
+                    <p class="text-sm text-gray-400">Скоро: отслеживание в реальном времени</p>
+                </div>
+                
+                <div class="absolute top-1/4 left-1/4 w-3 h-3 bg-red-600 rounded-full animate-pulse" title="Склад EMPIRE"></div>
+                <div class="absolute top-1/2 right-1/3 w-3 h-3 bg-green-600 rounded-full" title="Текущая локация"></div>
+            </div>
+        </div>
+    </div>
+</section>
+    <section class="py-16 px-8 max-w-[1400px] mx-auto bg-gray-50">
+        <h2 class="text-3xl font-black tracking-tighter uppercase mb-8">Вам также понравится</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="cursor-pointer group" onclick="window.location.href='product.html?id=3'">
+                <div class="bg-gray-100 rounded-lg overflow-hidden aspect-square mb-4 group-hover:opacity-80 transition">
+                    <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop" class="w-full h-full object-cover">
+                </div>
+                <h3 class="font-semibold text-sm mb-1">EMPIRE 1M Футболка</h3>
+                <p class="text-gray-500 text-sm">$40.00/день</p>
+            </div>
+            <div class="cursor-pointer group" onclick="window.location.href='product.html?id=1'">
+                <div class="bg-gray-100 rounded-lg overflow-hidden aspect-square mb-4 group-hover:opacity-80 transition">
+                    <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&h=400&fit=crop" class="w-full h-full object-cover">
+                </div>
+                <h3 class="font-semibold text-sm mb-1">EMPIRE Снепбек</h3>
+                <p class="text-gray-500 text-sm">$45.00/день</p>
+            </div>
+            <div class="cursor-pointer group" onclick="window.location.href='product.html?id=4'">
+                <div class="bg-gray-100 rounded-lg overflow-hidden aspect-square mb-4 group-hover:opacity-80 transition">
+                    <img src="https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=400&h=400&fit=crop" class="w-full h-full object-cover">
+                </div>
+                <h3 class="font-semibold text-sm mb-1">EMPIRE Парка</h3>
+                <p class="text-gray-500 text-sm">$175.00/день</p>
+            </div>
+            <div class="cursor-pointer group" onclick="window.location.href='product.html?id=8'">
+                <div class="bg-gray-100 rounded-lg overflow-hidden aspect-square mb-4 group-hover:opacity-80 transition">
+                    <img src="https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?w=400&h=400&fit=crop" class="w-full h-full object-cover">
+                </div>
+                <h3 class="font-semibold text-sm mb-1">EMPIRE Шапка</h3>
+                <p class="text-gray-500 text-sm">$20.00/день</p>
+            </div>
+        </div>
+    </section>
+    
+
+    <div class="bg-black text-white py-4 overflow-hidden border-b border-gray-800">
+        <div class="marquee whitespace-nowrap">
+            <span class="text-sm font-bold tracking-widest mx-8">100% НЕЗАВИСИМОСТЬ</span>
+            <span class="mx-4">
+                <svg width="20" height="20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" class="inline">
+                    <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+                </svg>
+            </span>
+        </div>
+    </div>
+
+    <footer class="bg-black text-white py-16 px-8">
+        <div class="max-w-[1400px] mx-auto text-center">
+            <svg width="50" height="50" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" class="mx-auto mb-4">
+                <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+            </svg>
+            <p class="text-xs text-gray-400">© 2025 EMPIRE DISTRIBUTION</p>
+        </div>
+    </footer>
+
+    
+
+    <script src="main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</body>
+</html>
+
+Стили:
+.thumb {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+    opacity: 0.5;
+}
+
+.thumb:hover,
+.thumb.active {
+    opacity: 1;
+    border-color: black;
+}
+
+.size-btn {
+    transition: all 0.3s ease;
+}
+
+.size-btn:hover,
+.size-btn.active {
+    background: black;
+    color: white;
+    border-color: black;
+}
+
+.size-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.color-btn {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.color-btn:hover {
+    transform: scale(1.1);
+}
+
+.color-btn.ring-2 {
+    box-shadow: 0 0 0 2px white, 0 0 0 4px black;
+}
+
+.rental-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+}
+
+.add-to-cart {
+    transition: all 0.3s ease;
+}
+
+.add-to-cart:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.add-to-cart.added {
+    background: #16a34a !important;
+}
+
+.timeline-pulse {
+    animation: timelinePulse 2s infinite;
+}
+
+@keyframes timelinePulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+    50% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+}
+
+.condition-bar {
+    height: 8px;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.condition-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+.trust-badge {
+    background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+}
+
+.location-dot {
+    position: relative;
+}
+
+.location-dot::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    opacity: 0.3;
+    animation: ripple 2s infinite;
+}
+
+@keyframes ripple {
+    0% { transform: scale(1); opacity: 0.3; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+
+
+.product-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05);
+}
+
+.product-image {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.marquee {
+    display: flex;
+    animation: marquee 20s linear infinite;
+}
+
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.search-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    z-index: 100;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 15vh;
+}
+
+.search-overlay.active {
+    display: flex;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 600px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid white;
+    color: white;
+    font-size: 2rem;
+    padding: 1rem;
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: rgba(255,255,255,0.5);
+}
+
+.badge {
+    backdrop-filter: blur(10px);
+}
+
+img {
+    background: #f3f4f6;
+}
+
+JS: 
+function() {
+    const params = new URLSearchParams(window.location.search);
+    const itemId = parseInt(params.get('id')) || 2;
+    
+    initDemoTracking(itemId);
+    
+    const history = ItemTracking.getHistory(itemId);
+    const stats = ItemTracking.getStats(itemId);
+    const currentLoc = ItemTracking.getCurrentLocation(itemId);
+    const currentCond = ItemTracking.getCurrentCondition(itemId);
+    
+    document.getElementById('current-location').textContent = currentLoc?.locationName || 'Неизвестно';
+    document.getElementById('condition-badge').textContent = currentCond?.conditionLabel || 'Хорошее';
+    document.getElementById('condition-badge').style.background = ItemTracking.getConditionBar(currentCond?.condition).color + '40';
+    document.getElementById('condition-badge').style.color = ItemTracking.getConditionBar(currentCond?.condition).color;
+    
+    document.getElementById('stat-rentals').textContent = stats.totalRentals;
+    document.getElementById('stat-days').textContent = stats.totalDays;
+    document.getElementById('stat-rating').innerHTML = `★ ${stats.avgRating}`;
+    
+    const popEl = document.getElementById('stat-popularity');
+    const popMap = { high: ['Высокая', 'bg-red-100 text-red-700'], medium: ['Средняя', 'bg-yellow-100 text-yellow-700'], low: ['Низкая', 'bg-gray-200 text-gray-600'] };
+    const [popText, popClass] = popMap[stats.popularity];
+    popEl.textContent = popText;
+    popEl.className = `px-2 py-0.5 rounded text-xs font-bold ${popClass}`;
+    
+    renderTimeline(history);
+    
+    function initDemoTracking(id) {
+        const existing = ItemTracking.getHistory(id);
+        if (existing.locations.length > 1) return; // Уже есть данные
+        
+        const product = store.products.find(p => p.id === id);
+        if (!product) return;
+        
+        ItemTracking.initTracking(id, {
+            title: product.name,
+            brand: 'EMPIRE',
+            category: product.category,
+            initialCondition: 'excellent',
+            photos: [product.image]
+        });
+        
+        const demoRentals = [
+            { days: 3, price: product.price, renter: 'Александр К.', rating: 5, date: '2025-03-15' },
+            { days: 7, price: product.price, renter: 'Мария С.', rating: 5, date: '2025-02-20' },
+            { days: 1, price: product.price, renter: 'Дмитрий В.', rating: 4, date: '2025-01-10' }
+        ];
+        
+        demoRentals.forEach((r, i) => {
+            ItemTracking.addLocation(id, 'storage', { date: r.date, notes: 'Поступила на склад' });
+            ItemTracking.addLocation(id, 'rented', { 
+                date: r.date, 
+                renterName: r.renter,
+                notes: `Аренда ${r.days} дней` 
+            });
+            
+            ItemTracking.addRental(id, {
+                days: r.days,
+                pricePerDay: r.price,
+                totalPaid: r.price * r.days,
+                renterName: r.renter,
+                renterRating: r.rating,
+                startDate: r.date,
+                endDate: new Date(new Date(r.date).getTime() + r.days * 86400000).toISOString(),
+                conditionBefore: 'excellent',
+                conditionAfter: 'excellent'
+            });
+        });
+        
+        ItemTracking.addLocation(id, 'storage', { notes: 'Возвращена после аренды' });
+        ItemTracking.addCondition(id, 'excellent', 'Проверка после 3 аренд', [], 'Екатерина М.');
+    }
+    
+    function renderTimeline(history) {
+        const container = document.getElementById('timeline-container');
+        const allEvents = [
+            ...history.locations.map(l => ({ ...l, icon: getLocationIcon(l.location), color: 'bg-blue-500' })),
+            ...history.rentals.map(r => ({ ...r, icon: '🛍️', color: 'bg-green-500', isRental: true })),
+            ...history.conditions.map(c => ({ ...c, icon: getConditionIcon(c.condition), color: 'bg-yellow-500' }))
+        ].sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        const showEvents = allEvents.slice(0, 5);
+        
+        container.innerHTML = showEvents.map((event, i) => `
+            <div class="relative flex gap-4 ${i === 0 ? 'animate-pulse' : ''}">
+                <div class="relative z-10 w-8 h-8 rounded-full ${event.color} flex items-center justify-center text-white text-sm shadow-lg">
+                    ${event.icon}
+                </div>
+                <div class="flex-1 pb-6">
+                    <div class="flex items-start justify-between mb-1">
+                        <div class="font-bold ${event.isRental ? 'text-green-700' : ''}">
+                            ${event.isRental ? `Аренда ${event.days} дней` : (event.locationName || event.conditionLabel)}
+                        </div>
+                        <div class="text-xs text-gray-400">${formatDate(event.date)}</div>
+                    </div>
+                    <div class="text-sm text-gray-600 mb-1">
+                        ${event.notes || (event.isRental ? `Арендатор: ${event.renterName} ★${event.renterRating}` : '')}
+                    </div>
+                    ${event.isRental ? `
+                        <div class="text-sm font-medium text-green-600">
+                            +$${Math.round(event.totalPaid * 0.8)} владельцу
+                        </div>
+                    ` : ''}
+                    ${event.inspector ? `
+                        <div class="text-xs text-gray-400 mt-1">
+                            Проверил: ${event.inspector}
+                        </div>
+                    ` : ''}
+                </div>
+            </div>
+        `).join('');
+        
+        if (allEvents.length > 5) {
+            document.getElementById('show-more-timeline').classList.remove('hidden');
+            document.getElementById('show-more-timeline').onclick = () => {
+                container.innerHTML = allEvents.map((event, i) => `
+                    <div class="relative flex gap-4">
+                        <div class="relative z-10 w-8 h-8 rounded-full ${event.color} flex items-center justify-center text-white text-sm shadow-lg">
+                            ${event.icon}
+                        </div>
+                        <div class="flex-1 pb-6">
+                            <div class="flex items-start justify-between mb-1">
+                                <div class="font-bold ${event.isRental ? 'text-green-700' : ''}">
+                                    ${event.isRental ? `Аренда ${event.days} дней` : (event.locationName || event.conditionLabel)}
+                                </div>
+                                <div class="text-xs text-gray-400">${formatDate(event.date)}</div>
+                            </div>
+                            <div class="text-sm text-gray-600">
+                                ${event.notes || (event.isRental ? `Арендатор: ${event.renterName} ★${event.renterRating}` : '')}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                document.getElementById('show-more-timeline').classList.add('hidden');
+            };
+        }
+    }
+    
+    function formatDate(dateStr) {
+        const date = new Date(dateStr);
+        const now = new Date();
+        const diff = Math.floor((now - date) / 86400000);
+        
+        if (diff === 0) return 'Сегодня';
+        if (diff === 1) return 'Вчера';
+        if (diff < 7) return `${diff} дн. назад`;
+        if (diff < 30) return `${Math.floor(diff / 7)} нед. назад`;
+        
+        return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+    }
+})();
+function loadProductDetails() {
+    const params = new URLSearchParams(window.location.search);
+    const id = parseInt(params.get('id')) || 2;
+
+    StorageManager.saveLastViewedProduct(id);
+
+    const product = store.products.find(p => p.id === id) || store.products[1];
+
+    document.title = `${product.name} — EMPIRE`;
+
+    const nameEl = document.getElementById('product-name');
+    const priceEl = document.getElementById('product-price');
+    const periodEl = document.getElementById('product-period');
+    const imageEl = document.getElementById('main-image');
+    const addBtn = document.getElementById('add-to-cart-btn');
+    const rentalSelect = document.getElementById('rental-period');
+
+    if (nameEl) nameEl.textContent = product.name;
+    if (priceEl) priceEl.textContent = `$${product.price}`;
+    if (periodEl) periodEl.textContent = `/${product.period}`;
+    if (imageEl) {
+        imageEl.src = PlaceholderGenerator.generate(800, 800, 'EMPIRE');
+        imageEl.setAttribute('data-src', product.image.replace('w=400', 'w=800').replace('h=400', 'h=800'));
+        imageEl.width = 800;
+        imageEl.height = 800;
+        imageEl.onerror = function() { 
+            this.onerror = null;
+            this.src = PlaceholderGenerator.generateError(800, 800); 
+        };
+    }
+
+    if (rentalSelect) {
+        rentalSelect.innerHTML = store.rentalPeriods.map(p => 
+            `<option value="${p}" ${p === product.period ? 'selected' : ''}>${p} — $${calculatePrice(product.price, product.period, p)}</option>`
+        ).join('');
+
+        rentalSelect.addEventListener('change', (e) => {
+            const newPrice = calculatePrice(product.price, product.period, e.target.value);
+            if (priceEl) priceEl.textContent = `$${newPrice}`;
+        });
+    }
+
+    if (addBtn) {
+        addBtn.onclick = () => {
+            const size = document.querySelector('.size-btn.active')?.textContent || 'M';
+            const colorBtn = document.querySelector('.color-btn.ring-2') || document.querySelector('.color-btn');
+            const color = colorBtn?.getAttribute('title') || 'Чёрный';
+            const rentalDays = rentalSelect?.value || product.period;
+            const finalPrice = calculatePrice(product.price, product.period, rentalDays);
+
+            addToCart(product.id, product.name, finalPrice, rentalDays, product.image, size, color, rentalDays);
+        };
+    }
+
+    refreshLazyLoading();
+}
+
+document.querySelectorAll('.thumb').forEach(thumb => {
+    thumb.addEventListener('click', function() {
+        document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        
+        const mainImage = document.getElementById('main-image');
+        if (mainImage) {
+            const newSrc = this.getAttribute('data-src');
+            if (newSrc) {
+                mainImage.style.opacity = '0.5';
+                
+                const tempImg = new Image();
+                tempImg.onload = function() {
+                    mainImage.src = newSrc;
+                    mainImage.style.opacity = '1';
+                };
+                tempImg.src = newSrc;
+            }
+        }
+    });
+});
+
+document.querySelectorAll('.size-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        localStorage.setItem('empire_last_product_options', JSON.stringify({
+            ...JSON.parse(localStorage.getItem('empire_last_product_options') || '{}'),
+            size: this.textContent
+        }));
+    });
+});
+
+document.querySelectorAll('.color-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('.color-btn').forEach(b => {
+            b.classList.remove('ring-2', 'ring-offset-2', 'ring-black');
+        });
+        this.classList.add('ring-2', 'ring-offset-2', 'ring-black');
+        localStorage.setItem('empire_last_product_options', JSON.stringify({
+            ...JSON.parse(localStorage.getItem('empire_last_product_options') || '{}'),
+            color: this.getAttribute('title')
+        }));
+    });
+});
+
+(function() {
+    const params = new URLSearchParams(window.location.search);
+    const itemId = parseInt(params.get('id')) || 2;
+    
+    initDemoTracking(itemId);
+    
+    const history = ItemTracking.getHistory(itemId);
+    const stats = ItemTracking.getStats(itemId);
+    const currentLoc = ItemTracking.getCurrentLocation(itemId);
+    const currentCond = ItemTracking.getCurrentCondition(itemId);
+    
+    document.getElementById('current-location').textContent = currentLoc?.locationName || 'Неизвестно';
+    document.getElementById('condition-badge').textContent = currentCond?.conditionLabel || 'Хорошее';
+    document.getElementById('condition-badge').style.background = ItemTracking.getConditionBar(currentCond?.condition).color + '40';
+    document.getElementById('condition-badge').style.color = ItemTracking.getConditionBar(currentCond?.condition).color;
+    
+    document.getElementById('stat-rentals').textContent = stats.totalRentals;
+    document.getElementById('stat-days').textContent = stats.totalDays;
+    document.getElementById('stat-rating').innerHTML = `★ ${stats.avgRating}`;
+    
+    const popEl = document.getElementById('stat-popularity');
+    const popMap = { high: ['Высокая', 'bg-red-100 text-red-700'], medium: ['Средняя', 'bg-yellow-100 text-yellow-700'], low: ['Низкая', 'bg-gray-200 text-gray-600'] };
+    const [popText, popClass] = popMap[stats.popularity];
+    popEl.textContent = popText;
+    popEl.className = `px-2 py-0.5 rounded text-xs font-bold ${popClass}`;
+    
+    renderTimeline(history);
+    
+    function initDemoTracking(id) {
+        const existing = ItemTracking.getHistory(id);
+        if (existing.locations.length > 1) return; 
+        
+        const product = store.products.find(p => p.id === id);
+        if (!product) return;
+        
+        ItemTracking.initTracking(id, {
+            title: product.name,
+            brand: 'EMPIRE',
+            category: product.category,
+            initialCondition: 'excellent',
+            photos: [product.image]
+        });
+        
+        const demoRentals = [
+            { days: 3, price: product.price, renter: 'Александр К.', rating: 5, date: '2025-03-15' },
+            { days: 7, price: product.price, renter: 'Мария С.', rating: 5, date: '2025-02-20' },
+            { days: 1, price: product.price, renter: 'Дмитрий В.', rating: 4, date: '2025-01-10' }
+        ];
+        
+        demoRentals.forEach((r, i) => {
+            ItemTracking.addLocation(id, 'storage', { date: r.date, notes: 'Поступила на склад' });
+            ItemTracking.addLocation(id, 'rented', { 
+                date: r.date, 
+                renterName: r.renter,
+                notes: `Аренда ${r.days} дней` 
+            });
+            
+            ItemTracking.addRental(id, {
+                days: r.days,
+                pricePerDay: r.price,
+                totalPaid: r.price * r.days,
+                renterName: r.renter,
+                renterRating: r.rating,
+                startDate: r.date,
+                endDate: new Date(new Date(r.date).getTime() + r.days * 86400000).toISOString(),
+                conditionBefore: 'excellent',
+                conditionAfter: 'excellent'
+            });
+        });
+        
+        ItemTracking.addLocation(id, 'storage', { notes: 'Возвращена после аренды' });
+        ItemTracking.addCondition(id, 'excellent', 'Проверка после 3 аренд', [], 'Екатерина М.');
+    }
+    
+    function renderTimeline(history) {
+        const container = document.getElementById('timeline-container');
+        const allEvents = [
+            ...history.locations.map(l => ({ ...l, icon: getLocationIcon(l.location), color: 'bg-blue-500' })),
+            ...history.rentals.map(r => ({ ...r, icon: '🛍️', color: 'bg-green-500', isRental: true })),
+            ...history.conditions.map(c => ({ ...c, icon: getConditionIcon(c.condition), color: 'bg-yellow-500' }))
+        ].sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        const showEvents = allEvents.slice(0, 5);
+        
+        container.innerHTML = showEvents.map((event, i) => `
+            <div class="relative flex gap-4 ${i === 0 ? 'animate-pulse' : ''}">
+                <div class="relative z-10 w-8 h-8 rounded-full ${event.color} flex items-center justify-center text-white text-sm shadow-lg">
+                    ${event.icon}
+                </div>
+                <div class="flex-1 pb-6">
+                    <div class="flex items-start justify-between mb-1">
+                        <div class="font-bold ${event.isRental ? 'text-green-700' : ''}">
+                            ${event.isRental ? `Аренда ${event.days} дней` : (event.locationName || event.conditionLabel)}
+                        </div>
+                        <div class="text-xs text-gray-400">${formatDate(event.date)}</div>
+                    </div>
+                    <div class="text-sm text-gray-600 mb-1">
+                        ${event.notes || (event.isRental ? `Арендатор: ${event.renterName} ★${event.renterRating}` : '')}
+                    </div>
+                    ${event.isRental ? `
+                        <div class="text-sm font-medium text-green-600">
+                            +$${Math.round(event.totalPaid * 0.8)} владельцу
+                        </div>
+                    ` : ''}
+                    ${event.inspector ? `
+                        <div class="text-xs text-gray-400 mt-1">
+                            Проверил: ${event.inspector}
+                        </div>
+                    ` : ''}
+                </div>
+            </div>
+        `).join('');
+        
+        if (allEvents.length > 5) {
+            document.getElementById('show-more-timeline').classList.remove('hidden');
+            document.getElementById('show-more-timeline').onclick = () => {
+                container.innerHTML = allEvents.map((event, i) => `
+                    <div class="relative flex gap-4">
+                        <div class="relative z-10 w-8 h-8 rounded-full ${event.color} flex items-center justify-center text-white text-sm shadow-lg">
+                            ${event.icon}
+                        </div>
+                        <div class="flex-1 pb-6">
+                            <div class="flex items-start justify-between mb-1">
+                                <div class="font-bold ${event.isRental ? 'text-green-700' : ''}">
+                                    ${event.isRental ? `Аренда ${event.days} дней` : (event.locationName || event.conditionLabel)}
+                                </div>
+                                <div class="text-xs text-gray-400">${formatDate(event.date)}</div>
+                            </div>
+                            <div class="text-sm text-gray-600">
+                                ${event.notes || (event.isRental ? `Арендатор: ${event.renterName} ★${event.renterRating}` : '')}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                document.getElementById('show-more-timeline').classList.add('hidden');
+            };
+        }
+    }
+    function formatDate(dateStr) {
+        const date = new Date(dateStr);
+        const now = new Date();
+        const diff = Math.floor((now - date) / 86400000);
+        
+        if (diff === 0) return 'Сегодня';
+        if (diff === 1) return 'Вчера';
+        if (diff < 7) return `${diff} дн. назад`;
+        if (diff < 30) return `${Math.floor(diff / 7)} нед. назад`;
+        
+        return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+    }
+})();
