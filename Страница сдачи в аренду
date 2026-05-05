@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет — EMPIRE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 text-black">
+
+    <nav class="sticky top-0 z-50 bg-white border-b border-gray-200 px-8 py-4">
+        <div class="max-w-[1400px] mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-8">
+                <a href="index.html" class="text-sm font-medium hover:opacity-70 transition">Главная</a>
+                <a href="shop.html" class="text-sm font-medium hover:opacity-70 transition">Каталог</a>
+                <a href="rent-out.html" class="text-sm font-medium hover:opacity-70 transition">Сдать вещь</a>
+                
+            </div>
+            
+            <a href="index.html" class="absolute left-1/2 transform -translate-x-1/2">
+                <svg width="40" height="40" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+                </svg>
+            </a>
+
+            <div class="flex items-center gap-6">
+                
+                <span class="text-sm font-medium">Привет, <span id="user-name">Владелец</span></span>
+                <a href="cart.html" class="flex items-center gap-2 cursor-pointer hover:opacity-70 transition">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    </svg>
+                    <span class="text-sm" id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-[1400px] mx-auto px-8 py-8">
+        <h1 class="text-4xl font-black tracking-tighter uppercase mb-8">Личный кабинет</h1>
+        
+        
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+                <div class="text-3xl font-black text-red-600" id="stat-active">0</div>
+                <div class="text-sm text-gray-500">Активных объявлений</div>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+                <div class="text-3xl font-black" id="stat-rentals">0</div>
+                <div class="text-sm text-gray-500">Аренд всего</div>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+                <div class="text-3xl font-black text-green-600" id="stat-earnings">$0</div>
+                <div class="text-sm text-gray-500">Заработано</div>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+                <div class="text-3xl font-black" id="stat-rating">5.0</div>
+                <div class="text-sm text-gray-500">Рейтинг</div>
+            </div>
+        </div>
+
+        <div class="flex gap-2 mb-6 border-b">
+            <button class="tab-btn active px-6 py-3 font-medium border-b-2 border-black" data-tab="listings">Мои вещи</button>
+            <button class="tab-btn px-6 py-3 font-medium text-gray-500 hover:text-black" data-tab="rentals">История аренд</button>
+            <button class="tab-btn px-6 py-3 font-medium text-gray-500 hover:text-black" data-tab="payouts">Выплаты</button>
+            <button class="tab-btn px-6 py-3 font-medium text-gray-500 hover:text-black" data-tab="points">
+    Empire Баллы
+</button>
+        </div>
+
+<div id="tab-points" class="tab-content hidden">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-gradient-to-br from-red-600 to-red-800 rounded-2xl p-6 text-white">
+            <div class="text-sm opacity-80 mb-2">Доступно баллов</div>
+            <div class="text-5xl font-black mb-2 em-balance">0</div>
+            <div class="text-sm opacity-80">≈ $<span id="em-value">0</span></div>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-6 shadow-sm border-2" id="level-card" style="border-color: #cd7f32;">
+            <div class="text-sm text-gray-500 mb-2">Ваш уровень</div>
+            <div class="text-3xl font-black mb-2 em-level" style="color: #cd7f32;">Bronze</div>
+            <div class="text-sm text-gray-600 mb-3">
+                Множитель: <span id="em-multiplier">1x</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="bg-red-600 h-2 rounded-full transition-all" id="level-progress" style="width: 0%"></div>
+            </div>
+            <div class="text-xs text-gray-500 mt-2">
+                До <span id="next-level">Silver</span>: <span id="points-needed">500</span> EMB
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-6 shadow-sm">
+            <div class="text-sm text-gray-500 mb-2">Всего заработано</div>
+            <div class="text-3xl font-black mb-4" id="em-total-earned">0</div>
+            <div class="text-sm text-gray-500 mb-2">Всего потрачено</div>
+            <div class="text-3xl font-black text-gray-400" id="em-total-spent">0</div>
+        </div>
+    </div>
+    
+    <h3 class="font-bold text-lg mb-4">Заработать баллы</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        <div class="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm">
+            <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-2xl">📦</div>
+            <div class="flex-1">
+                <div class="font-semibold">Разместить вещь</div>
+                <div class="text-sm text-gray-500">+50 EMB за первое размещение</div>
+            </div>
+            <a href="rent-out.html" class="text-red-600 font-medium">→</a>
+        </div>
+        
+        <div class="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm">
+            <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-2xl">🛒</div>
+            <div class="flex-1">
+                <div class="font-semibold">Взять в аренду</div>
+                <div class="text-sm text-gray-500">+5 EMB за каждый день</div>
+            </div>
+            <a href="shop.html" class="text-red-600 font-medium">→</a>
+        </div>
+        
+        <div class="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm">
+            <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-2xl">⭐</div>
+            <div class="flex-1">
+                <div class="font-semibold">Оставить отзыв</div>
+                <div class="text-sm text-gray-500">+25 EMB за отзыв</div>
+            </div>
+            <span class="text-gray-400 text-sm">Скоро</span>
+        </div>
+        
+        <div class="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm">
+            <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-2xl">👥</div>
+            <div class="flex-1">
+                <div class="font-semibold">Пригласить друга</div>
+                <div class="text-sm text-gray-500">+200 EMB за регистрацию</div>
+            </div>
+            <button onclick="copyReferral()" class="text-red-600 font-medium">Копировать ссылку</button>
+        </div>
+    </div>
+    
+    <h3 class="font-bold text-lg mb-4">История операций</h3>
+    <div id="em-history" class="space-y-2">
+    </div>
+</div>
+        <div id="tab-listings" class="tab-content">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold">Мои объявления</h2>
+                <a href="rent-out.html" class="bg-black text-white px-6 py-2 rounded-full font-medium hover:bg-gray-800 transition">
+                    + Добавить вещь
+                </a>
+            </div>
+            
+            <div id="listings-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            </div>
+            
+            <div id="empty-listings" class="hidden text-center py-16">
+                <p class="text-gray-500 mb-4">У вас пока нет объявлений</p>
+                <a href="rent-out.html" class="text-red-600 font-medium hover:underline">Сдать первую вещь →</a>
+            </div>
+        </div>
+
+
+        <div id="tab-rentals" class="tab-content hidden">
+            <h2 class="text-xl font-bold mb-6">История аренд</h2>
+            <div id="rentals-list" class="space-y-4">
+            </div>
+        </div>
+
+        
+        <div id="tab-payouts" class="tab-content hidden">
+            <h2 class="text-xl font-bold mb-6">Выплаты</h2>
+            <div class="bg-white rounded-xl p-6 shadow-sm mb-6">
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        <div class="text-sm text-gray-500">Доступно для вывода</div>
+                        <div class="text-3xl font-black" id="payout-available">$0</div>
+                    </div>
+                    <button class="bg-black text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition" onclick="requestPayout()">
+                        Вывести
+                    </button>
+                </div>
+                <div class="text-sm text-gray-500">Минимальная сумма вывода: $50</div>
+            </div>
+            
+            
+            
+            <div id="payouts-list" class="space-y-2">
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
+
+Стили:
+.tab-btn {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+
+.tab-btn.active {
+    color: black;
+    border-bottom-color: black;
+}
+
+.tab-btn:hover:not(.active) {
+    color: #374151;
+}
+
+.tab-content {
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-content.hidden {
+    display: none;
+}
+
+.em-balance {
+    font-variant-numeric: tabular-nums;
+}
+
+.em-level {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.bg-gradient-to-br.from-red-600.to-red-800 {
+    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+}
+
+#level-progress {
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#tab-points .flex.items-center.gap-4 {
+    transition: all 0.3s ease;
+}
+
+#tab-points .flex.items-center.gap-4:hover {
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+#listings-grid .bg-white {
+    transition: all 0.3s ease;
+}
+
+#listings-grid .bg-white:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+}
+
+.bg-yellow-100 { background-color: #fef9c3; }
+.text-yellow-800 { color: #854d0e; }
+.bg-green-100 { background-color: #dcfce7; }
+.text-green-800 { color: #166534; }
+.bg-red-100 { background-color: #fee2e2; }
+.text-red-800 { color: #991b1b; }
+
+.border-yellow-200 { border-color: #fef08a; }
+.border-green-200 { border-color: #bbf7d0; }
+.border-red-200 { border-color: #fecaca; }
+
+#payout-available {
+    font-variant-numeric: tabular-nums;
+}
+
+#empty-listings {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: black;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    z-index: 10000;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.toast-success { background: #16a34a; }
+.toast-error { background: #dc2626; }
+.toast-warning { background: #f59e0b; }
+
+JS:
+(function() {
+            const listings = JSON.parse(localStorage.getItem('empire_listings') || '[]');
+            const rentals = JSON.parse(localStorage.getItem('empire_rentals') || '[]');
+            const payouts = JSON.parse(localStorage.getItem('empire_payouts') || '[]');
+            
+            const active = listings.filter(l => l.status === 'approved').length;
+            const totalRentals = rentals.length;
+            const totalEarnings = rentals.reduce((sum, r) => sum + (r.ownerEarnings || 0), 0);
+            
+            document.getElementById('stat-active').textContent = active;
+            document.getElementById('stat-rentals').textContent = totalRentals;
+            document.getElementById('stat-earnings').textContent = `$${totalEarnings}`;
+            document.getElementById('payout-available').textContent = `$${totalEarnings}`;
+            
+            const listingsGrid = document.getElementById('listings-grid');
+            const emptyListings = document.getElementById('empty-listings');
+            
+            if (listings.length === 0) {
+                emptyListings.classList.remove('hidden');
+            } else {
+                listingsGrid.innerHTML = listings.map(item => `
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm border ${getStatusBorder(item.status)}">
+                        <div class="aspect-[4/3] bg-gray-100 relative">
+                            ${item.photos?.[0] ? 
+                                `<img src="${item.photos[0]}" class="w-full h-full object-cover">` :
+                                `<div class="flex items-center justify-center h-full text-gray-400">Нет фото</div>`
+                            }
+                            <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold uppercase ${getStatusStyle(item.status)}">
+                                ${getStatusText(item.status)}
+                            </span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold mb-1 truncate">${item.title}</h3>
+                            <p class="text-gray-500 text-sm mb-3">$${item.rentalPrice}/день</p>
+                            <div class="flex gap-2">
+                                <button onclick="editListing(${item.id})" class="flex-1 py-2 border rounded-lg text-sm font-medium hover:bg-gray-50">Изменить</button>
+                                <button onclick="deleteListing(${item.id})" class="px-3 py-2 border rounded-lg text-red-600 hover:bg-red-50">🗑</button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            function getStatusBorder(status) {
+                const map = {
+                    pending: 'border-yellow-200',
+                    approved: 'border-green-200',
+                    rejected: 'border-red-200'
+                };
+                return map[status] || 'border-gray-200';
+            }
+            
+            function getStatusStyle(status) {
+                const map = {
+                    pending: 'bg-yellow-100 text-yellow-800',
+                    approved: 'bg-green-100 text-green-800',
+                    rejected: 'bg-red-100 text-red-800'
+                };
+                return map[status] || 'bg-gray-100 text-gray-800';
+            }
+            
+            function getStatusText(status) {
+                const map = {
+                    pending: 'На проверке',
+                    approved: 'Активно',
+                    rejected: 'Отклонено'
+                };
+                return map[status] || status;
+            }
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.tab-btn').forEach(b => {
+                        b.classList.remove('active', 'border-b-2', 'border-black', 'text-black');
+                        b.classList.add('text-gray-500');
+                    });
+                    btn.classList.add('active', 'border-b-2', 'border-black', 'text-black');
+                    btn.classList.remove('text-gray-500');
+                    
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+                    document.getElementById(`tab-${btn.dataset.tab}`).classList.remove('hidden');
+                });
+            });
+            
+            window.editListing = (id) => {
+                showToast('Редактирование скоро будет доступно', 'warning');
+            };
+            
+            window.deleteListing = (id) => {
+                if (!confirm('Удалить объявление?')) return;
+                
+                const updated = listings.filter(l => l.id !== id);
+                localStorage.setItem('empire_listings', JSON.stringify(updated));
+                location.reload();
+            };
+            
+            window.requestPayout = () => {
+                if (totalEarnings < 50) {
+                    showToast('Минимальная сумма вывода $50', 'error');
+                    return;
+                }
+                showToast('Запрос на вывод отправлен', 'success');
+            };
+        })();
