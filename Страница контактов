@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты — EMPIRE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <base target="_blank">
+</head>
+<body class="bg-white text-black">
+
+    <div class="bg-black text-white text-center py-2 text-xs tracking-widest uppercase font-medium">
+        СКИДКА 10% — КОД: EMPIRE10
+    </div>
+
+    <nav class="sticky top-0 z-50 bg-white border-b border-gray-200 px-8 py-4">
+        <div class="max-w-[1400px] mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-8">
+                <a href="index.html" class="text-sm font-medium hover:opacity-70 transition">Главная</a>
+                <a href="shop.html" class="text-sm font-medium hover:opacity-70 transition">Каталог</a>
+                <a href="news.html" class="text-sm font-medium hover:opacity-70 transition">Новости</a>
+                <a href="contact.html" class="text-sm font-bold border-b-2 border-black pb-1">Контакты</a>
+            </div>
+
+            <a href="index.html" class="absolute left-1/2 transform -translate-x-1/2">
+                <svg width="40" height="40" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+                </svg>
+            </a>
+
+            <div class="flex items-center gap-6">
+                <button id="search-btn" class="text-sm font-medium hover:opacity-70 transition">Поиск</button>
+                <a href="rent-out.html" class="text-sm font-bold border-b-2 border-black pb-1">Сдать вещь</a>
+                <a href="dashboard.html" class="text-sm font-medium hover:opacity-70 transition">Кабинет</a>
+
+                <a href="dashboard.html#points" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-red-600 to-red-500 text-white text-sm font-medium hover:shadow-lg transition">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                    <span class="em-balance">0</span> EMB
+                </a>    
+                <a href="cart.html" class="flex items-center gap-2 cursor-pointer hover:opacity-70 transition">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="text-sm" id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="form-progress-container">
+        <div class="form-progress-wrapper">
+            <div class="form-progress-header">
+                <span class="form-progress-title">Заполнение формы</span>
+                <span id="form-percent" class="form-progress-percent">0%</span>
+            </div>
+            <div class="form-progress-bar-bg">
+                <div id="form-progress-bar" class="form-progress-bar-fill" style="width: 0%"></div>
+            </div>
+            <div class="form-progress-steps">
+                <div class="form-progress-step" data-step="name">
+                    <div class="form-progress-step-dot"></div>
+                    <span class="form-progress-step-label">Имя</span>
+                </div>
+                <div class="form-progress-step" data-step="email">
+                    <div class="form-progress-step-dot"></div>
+                    <span class="form-progress-step-label">Email</span>
+                </div>
+                <div class="form-progress-step" data-step="subject">
+                    <div class="form-progress-step-dot"></div>
+                    <span class="form-progress-step-label">Тема</span>
+                </div>
+                <div class="form-progress-step" data-step="message">
+                    <div class="form-progress-step-dot"></div>
+                    <span class="form-progress-step-label">Сообщение</span>
+                </div>
+            </div>
+            <div id="form-status" class="form-status">
+                Осталось заполнить: 4 поля
+            </div>
+        </div>
+    </div>
+
+    <section class="py-12 px-8 max-w-[1400px] mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <div>
+                <h1 class="text-6xl md:text-8xl font-black tracking-tighter uppercase mb-8">Контакты</h1>
+                <p class="text-xl text-gray-600 mb-12 leading-relaxed">
+                    Свяжитесь с командой EMPIRE. Если вы артист, хотите стать партнёром, у вас есть вопросы или деловое предложение — мы всегда рады услышать вас.
+                </p>
+
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-sm font-bold uppercase tracking-wider text-gray-400 mb-2">Общие вопросы</h3>
+                        <a href="mailto:info@empire.com" class="text-xl font-semibold hover:opacity-70 transition">info@empire.com</a>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold uppercase tracking-wider text-gray-400 mb-2">A&R / Артисты</h3>
+                        <a href="mailto:artists@empire.com" class="text-xl font-semibold hover:opacity-70 transition">artists@empire.com</a>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold uppercase tracking-wider text-gray-400 mb-2">Пресса</h3>
+                        <a href="mailto:press@empire.com" class="text-xl font-semibold hover:opacity-70 transition">press@empire.com</a>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold uppercase tracking-wider text-gray-400 mb-2">Поддержка по мерчу</h3>
+                        <a href="mailto:merch@empire.com" class="text-xl font-semibold hover:opacity-70 transition">merch@empire.com</a>
+                    </div>
+                </div>
+
+                <div class="mt-12 pt-12 border-t border-gray-200">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-gray-400 mb-4">Подписаться</h3>
+                    <div class="flex gap-4">
+                        <a href="https://instagram.com" target="_blank" class="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center hover:opacity-70 transition">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <a href="https://twitter.com" target="_blank" class="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center hover:opacity-70 transition">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <a href="https://facebook.com" target="_blank" class="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center hover:opacity-70 transition">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-2xl p-8 md:p-12">
+                <h2 class="text-2xl font-bold mb-6">Отправить сообщение</h2>
+                <form id="contact-form" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Имя *</label>
+                            <input type="text" name="firstName" class="input-field w-full px-4 py-3 rounded-lg bg-white" placeholder="Иван" required data-step="name">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Фамилия *</label>
+                            <input type="text" name="lastName" class="input-field w-full px-4 py-3 rounded-lg bg-white" placeholder="Иванов" required data-step="name">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Email *</label>
+                        <input type="email" name="email" class="input-field w-full px-4 py-3 rounded-lg bg-white" placeholder="ivan@example.com" required data-step="email">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Тема *</label>
+                        <select name="subject" class="input-field w-full px-4 py-3 rounded-lg bg-white cursor-pointer" required data-step="subject">
+                            <option value="">Выберите тему</option>
+                            <option value="general">Общий вопрос</option>
+                            <option value="artist">Для артистов</option>
+                            <option value="press">Пресса</option>
+                            <option value="merch">Поддержка по мерчу</option>
+                            <option value="business">Бизнес</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Сообщение *</label>
+                        <textarea name="message" class="input-field w-full px-4 py-3 rounded-lg bg-white h-32 resize-none" placeholder="Расскажите, что вас интересует..." required data-step="message"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn w-full bg-black text-white py-4 rounded-full font-semibold text-lg hover:bg-gray-800 transition">
+                        Отправить
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-black text-white py-20 px-8">
+        <div class="max-w-[1400px] mx-auto">
+            <h2 class="text-4xl font-black tracking-tighter uppercase mb-12">Офисы</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="border border-gray-800 rounded-xl p-8 hover:border-gray-600 transition cursor-pointer" onclick="window.open('https://maps.google.com/?q=San+Francisco', '_blank')">
+                    <h3 class="text-xl font-bold mb-4">Сан-Франциско</h3>
+                    <p class="text-gray-400 mb-2">Главный офис</p>
+                    <p class="text-gray-300">123 Market Street<br>San Francisco, CA 94105</p>
+                    <p class="text-gray-500 text-sm mt-4">+1 (415) 555-0123</p>
+                </div>
+                <div class="border border-gray-800 rounded-xl p-8 hover:border-gray-600 transition cursor-pointer" onclick="window.open('https://maps.google.com/?q=New+York', '_blank')">
+                    <h3 class="text-xl font-bold mb-4">Нью-Йорк</h3>
+                    <p class="text-gray-400 mb-2">Офис Восточного побережья</p>
+                    <p class="text-gray-300">456 Broadway<br>New York, NY 10013</p>
+                    <p class="text-gray-500 text-sm mt-4">+1 (212) 555-0456</p>
+                </div>
+                <div class="border border-gray-800 rounded-xl p-8 hover:border-gray-600 transition cursor-pointer" onclick="window.open('https://maps.google.com/?q=London', '_blank')">
+                    <h3 class="text-xl font-bold mb-4">Лондон</h3>
+                    <p class="text-gray-400 mb-2">Офис в Великобритании</p>
+                    <p class="text-gray-300">789 Camden High Street<br>London NW1 7JY</p>
+                    <p class="text-gray-500 text-sm mt-4">+44 20 7946 0958</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="bg-black text-white py-4 overflow-hidden border-b border-gray-800">
+        <div class="marquee whitespace-nowrap">
+            <span class="text-sm font-bold tracking-widest mx-8">100% НЕЗАВИСИМОСТЬ</span>
+            <span class="mx-4">
+                <svg width="20" height="20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" class="inline">
+                    <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+                </svg>
+            </span>
+        </div>
+    </div>
+
+    <footer class="bg-black text-white py-16 px-8">
+        <div class="max-w-[1400px] mx-auto text-center">
+            <svg width="50" height="50" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" class="mx-auto mb-4">
+                <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+            </svg>
+            <p class="text-xs text-gray-400">© 2025 EMPIRE DISTRIBUTION</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</body>
+</html>
+
+Стили:
+.input-field {
+    transition: all 0.3s ease;
+    border: 2px solid #e5e7eb;
+}
+
+.input-field:focus {
+    border-color: black;
+    outline: none;
+}
+
+.submit-btn {
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.form-progress-container {
+    position: unset;
+    top: 80px;
+    z-index: 40;
+    background: white;
+    padding: 30px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.form-progress-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.form-progress-title {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #374151;
+}
+
+.form-progress-percent {
+    font-size: 24px;
+    font-weight: 800;
+    color: #000;
+    transition: color 0.3s ease;
+}
+
+.form-progress-percent.complete {
+    color: #16a34a;
+}
+
+.form-progress-bar-bg {
+    width: 100%;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 9999px;
+    overflow: hidden;
+    position: relative;
+}
+
+.form-progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #000 0%, #dc2626 100%);
+    border-radius: 9999px;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.form-progress-bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255,255,255,0.3) 50%,
+        transparent 100%
+    );
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.form-progress-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    padding: 0 4px;
+}
+
+.form-progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.form-progress-step-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #e5e7eb;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.form-progress-step.active .form-progress-step-dot {
+    background: #000;
+    transform: scale(1.2);
+}
+
+.form-progress-step.complete .form-progress-step-dot {
+    background: #16a34a;
+    border-color: #16a34a;
+}
+
+.form-progress-step-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #9ca3af;
+    transition: color 0.3s ease;
+}
+
+.form-progress-step.active .form-progress-step-label,
+.form-progress-step.complete .form-progress-step-label {
+    color: #000;
+    font-weight: 600;
+}
+
+.form-progress-step.complete .form-progress-step-label {
+    color: #16a34a;
+}
+
+.input-field {
+    transition: all 0.3s ease;
+    border: 2px solid #e5e7eb;
+}
+
+.input-field:focus {
+    border-color: #000;
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.1);
+}
+
+.input-field.filled {
+    border-color: #16a34a;
+    background: #f0fdf4;
+}
+
+.input-field.error {
+    border-color: #dc2626;
+    background: #fef2f2;
+}
+
+@keyframes pulse-green {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(22, 163, 74, 0); }
+}
+
+.input-field.just-filled {
+    animation: pulse-green 0.6s ease;
+}
+
+.form-status {
+    text-align: center;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.form-status.complete {
+    color: #16a34a;
+    font-weight: 600;
+}
+JS:
+function initContactForm() {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+
+    const saved = StorageManager.loadContactForm();
+    if (saved) {
+        Object.keys(saved).forEach(key => {
+            const input = form.querySelector(`[name="${key}"]`);
+            if (input && key !== 'timestamp') {
+                input.value = saved[key];
+            }
+        });
+    }
+
+    form.querySelectorAll('input, select, textarea').forEach(input => {
+        input.addEventListener('input', () => {
+            const data = {};
+            form.querySelectorAll('input, select, textarea').forEach(field => {
+                data[field.name] = field.value;
+            });
+            StorageManager.saveContactForm(data);
+        });
+    });
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="btn-spinner"></span>Отправка...';
+
+        setTimeout(() => {
+            btn.innerHTML = '✓ Отправлено!';
+            btn.style.background = '#16a34a';
+            showToast('Сообщение отправлено!', 'success');
+
+            StorageManager.clearContactForm();
+            form.reset();
+
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.textContent = 'Отправить';
+                btn.style.background = '';
+            }, 2000);
+        }, 1500);
+    });
+}
+
+(function() {
+            const form = document.getElementById('contact-form');
+            const progressBar = document.getElementById('form-progress-bar');
+            const percentText = document.getElementById('form-percent');
+            const statusText = document.getElementById('form-status');
+            const steps = document.querySelectorAll('.form-progress-step');
+
+            const fields = [
+                { name: 'firstName', step: 'name', weight: 20 },
+                { name: 'lastName', step: 'name', weight: 15 },
+                { name: 'email', step: 'email', weight: 25 },
+                { name: 'subject', step: 'subject', weight: 20 },
+                { name: 'message', step: 'message', weight: 20 }
+            ];
+
+            function updateProgress() {
+                let totalProgress = 0;
+                const filledSteps = new Set();
+
+                fields.forEach(field => {
+                    const input = form.querySelector(`[name="${field.name}"]`);
+                    if (input && input.value.trim()) {
+                        totalProgress += field.weight;
+                        filledSteps.add(field.step);
+
+                        input.classList.add('filled');
+                        input.classList.add('just-filled');
+                        setTimeout(() => input.classList.remove('just-filled'), 600);
+                    } else if (input) {
+                        input.classList.remove('filled');
+                    }
+                });
+
+                progressBar.style.width = totalProgress + '%';
+                percentText.textContent = Math.round(totalProgress) + '%';
+
+                if (totalProgress === 100) {
+                    percentText.classList.add('complete');
+                    statusText.textContent = ' Форма готова к отправке!';
+                    statusText.classList.add('complete');
+                } else {
+                    percentText.classList.remove('complete');
+                    const remaining = fields.filter(f => {
+                        const input = form.querySelector(`[name="${f.name}"]`);
+                        return !input || !input.value.trim();
+                    }).length;
+                    statusText.textContent = `Осталось заполнить: ${remaining} поля`;
+                    statusText.classList.remove('complete');
+                }
+
+                steps.forEach(step => {
+                    const stepName = step.dataset.step;
+                    const stepFields = fields.filter(f => f.step === stepName);
+                    const filledFields = stepFields.filter(f => {
+                        const input = form.querySelector(`[name="${f.name}"]`);
+                        return input && input.value.trim();
+                    }).length;
+
+                    step.classList.remove('active', 'complete');
+                    if (filledFields === stepFields.length) {
+                        step.classList.add('complete');
+                    } else if (filledFields > 0) {
+                        step.classList.add('active');
+                    }
+                });
+
+                saveFormData();
+            }
+
+            function saveFormData() {
+                const data = {};
+                fields.forEach(field => {
+                    const input = form.querySelector(`[name="${field.name}"]`);
+                    if (input) {
+                        data[field.name] = input.value;
+                    }
+                });
+                data.progress = parseInt(percentText.textContent);
+                localStorage.setItem('empire_contact_form_progress', JSON.stringify(data));
+            }
+
+            function loadFormData() {
+                const saved = localStorage.getItem('empire_contact_form_progress');
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    fields.forEach(field => {
+                        const input = form.querySelector(`[name="${field.name}"]`);
+                        if (input && data[field.name]) {
+                            input.value = data[field.name];
+                        }
+                    });
+                    updateProgress();
+                }
+            }
+
+            fields.forEach(field => {
+                const input = form.querySelector(`[name="${field.name}"]`);
+                if (input) {
+                    input.addEventListener('input', updateProgress);
+                    input.addEventListener('change', updateProgress);
+                    input.addEventListener('focus', () => {
+                        steps.forEach(s => s.classList.remove('active'));
+                        const step = document.querySelector(`.form-progress-step[data-step="${field.step}"]`);
+                        if (step) step.classList.add('active');
+                    });
+                }
+            });
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = form.querySelector('button[type="submit"]');
+                btn.disabled = true;
+                btn.textContent = 'Отправка...';
+
+                setTimeout(() => {
+                    btn.textContent = 'Отправлено!';
+                    showToast('Сообщение отправлено!');
+
+                    localStorage.removeItem('empire_contact_form_progress');
+                    form.reset();
+                    updateProgress();
+
+                    setTimeout(() => {
+                        btn.disabled = false;
+                        btn.textContent = 'Отправить';
+                    }, 2000);
+                }, 1500);
+            });
+
+            loadFormData();
+        })();
+
+        const StorageManager = {
+    saveContactForm(data) {
+        localStorage.setItem('empire_contact_form', JSON.stringify({
+            ...data,
+            timestamp: new Date().toISOString()
+        }));
+    },
+
+    loadContactForm() {
+        const saved = localStorage.getItem('empire_contact_form');
+        return saved ? JSON.parse(saved) : null;
+    },
+
+    clearContactForm() {
+        localStorage.removeItem('empire_contact_form');
+    }
+};
