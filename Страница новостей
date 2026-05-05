@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новости — EMPIRE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+<base target="_blank">
+</head>
+<body class="bg-white text-black">
+
+    <div id="search-overlay" class="search-overlay">
+        <button id="close-search" class="absolute top-8 right-8 text-white">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <div class="w-full max-w-2xl">
+            <input type="text" id="search-input" class="search-input" placeholder="Поиск новостей...">
+            <div id="search-results" class="mt-8 max-h-96 overflow-y-auto"></div>
+        </div>
+    </div>
+
+    <div class="bg-black text-white text-center py-2 text-xs tracking-widest uppercase font-medium">
+        СКИДКА 10% — КОД: EMPIRE10
+    </div>
+
+    <nav class="sticky top-0 z-50 bg-white border-b border-gray-200 px-8 py-4">
+        <div class="max-w-[1400px] mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-8">
+                <a href="index.html" class="text-sm font-medium hover:opacity-70 transition">Главная</a>
+                <a href="shop.html" class="text-sm font-medium hover:opacity-70 transition">Каталог</a>
+                <a href="news.html" class="text-sm font-bold border-b-2 border-black pb-1">Новости</a>
+                <a href="contact.html" class="text-sm font-medium hover:opacity-70 transition">Контакты</a>
+            </div>
+
+            <a href="index.html" class="absolute left-1/2 transform -translate-x-1/2">
+                <svg width="40" height="40" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+                </svg>
+            </a>
+
+            <div class="flex items-center gap-6">
+                <button id="search-btn" class="text-sm font-medium hover:opacity-70 transition">Поиск</button>
+                <a href="rent-out.html" class="text-sm font-bold border-b-2 border-black pb-1">Сдать вещь</a>
+                <a href="dashboard.html" class="text-sm font-medium hover:opacity-70 transition">Кабинет</a>
+                <a href="dashboard.html#points" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-red-600 to-red-500 text-white text-sm font-medium hover:shadow-lg transition">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                    <span class="em-balance">0</span> EMB
+                </a>
+                <a href="cart.html" class="flex items-center gap-2 cursor-pointer hover:opacity-70 transition">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="text-sm" id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="py-12 px-8 max-w-[1400px] mx-auto">
+        <h1 class="text-6xl md:text-8xl font-black tracking-tighter uppercase mb-8">Новости</h1>
+
+        <div class="flex flex-wrap gap-4 mb-12">
+            <a href="news.html" class="filter-btn active px-6 py-2 rounded-full border border-black text-sm font-semibold bg-black text-white">Все</a>
+            <a href="news.html?filter=new-artists" class="filter-btn px-6 py-2 rounded-full border border-gray-300 text-sm font-medium hover:border-black transition">Новые артисты</a>
+            <a href="news.html?filter=releases" class="filter-btn px-6 py-2 rounded-full border border-gray-300 text-sm font-medium hover:border-black transition">Релизы</a>
+            <a href="news.html?filter=interviews" class="filter-btn px-6 py-2 rounded-full border border-gray-300 text-sm font-medium hover:border-black transition">Интервью</a>
+            <a href="news.html?filter=events" class="filter-btn px-6 py-2 rounded-full border border-gray-300 text-sm font-medium hover:border-black transition">События</a>
+        </div>
+
+        <article class="news-card mb-12 cursor-pointer group" onclick="window.location.href='article.html?id=1'">
+            <div class="relative rounded-2xl overflow-hidden aspect-[21/9] mb-6">
+                <span class="badge absolute top-6 left-6 bg-black text-white text-xs font-bold px-4 py-2 rounded-full uppercase">Главная новость</span>
+                <img src="https://obs-image-service-mz.obs.ru-moscow-1.hc.sbercloud.ru/e3d0c944-b7ed-4a98-80c3-b90b2058cc1d" 
+                     alt="Bebe Rexha заключила партнёрство с EMPIRE"
+                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                     loading="lazy">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div class="absolute bottom-6 left-6 right-6 text-white">
+                    <h2 class="text-3xl md:text-5xl font-black uppercase mb-2">Bebe Rexha заключила партнёрство с EMPIRE</h2>
+                    <p class="text-sm opacity-80">15 января 2025</p>
+                </div>
+            </div>
+        </article>
+
+        <div id="news-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <article class="news-card group cursor-pointer" onclick="window.location.href='article.html?id=1'">
+                <div class="relative rounded-xl overflow-hidden aspect-[4/3] mb-4">
+                    <span class="badge absolute top-4 left-4 bg-black text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Новый артист</span>
+                    <img src="https://s.yimg.com/ny/api/res/1.2/O_V_VKcqL40.6Q0Ah2JzrQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDQ7Y2Y9d2VicA--/https://media.zenfs.com/en/wwd_409/f4d5c4e9402f06466cfc2c6701309fbf" 
+                         alt="Bebe Rexha заключила партнёрство с EMPIRE"
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                         loading="lazy"
+                         onerror="this.src='https://via.placeholder.com/400x300/f3f4f6/000000?text=EMPIRE+NEWS'">
+                </div>
+                <p class="text-xs text-gray-500 mb-2">15 января 2025</p>
+                <h3 class="text-xl font-bold mb-2 group-hover:opacity-70 transition">Bebe Rexha заключила партнёрство с EMPIRE</h3>
+                <p class="text-gray-600 text-sm line-clamp-2">Четырёхкратная номинантка на Грэмми поп-исполнительница и автор песен Bebe Rexha стала независимым артистом...</p>
+            </article>
+
+            <article class="news-card group cursor-pointer" onclick="window.location.href='article.html?id=2'">
+                <div class="relative rounded-xl overflow-hidden aspect-[4/3] mb-4">
+                    <span class="badge absolute top-4 left-4 bg-black text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Интервью</span>
+                    <img src="https://www.billboard.com/wp-content/uploads/2025/02/cover-ghazi-billboard-2025-bb03-austin-hargrave-3-1260.jpg" 
+                         alt="Звезда Залива: Как Гази из EMPIRE привёл музыкальный бизнес в Сан-Франциско"
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                         loading="lazy"
+                         onerror="this.src='https://via.placeholder.com/400x300/f3f4f6/000000?text=EMPIRE+NEWS'">
+                </div>
+                <p class="text-xs text-gray-500 mb-2">12 января 2025</p>
+                <h3 class="text-xl font-bold mb-2 group-hover:opacity-70 transition">Звезда Залива: Как Гази из EMPIRE привёл музыкальный бизнес в Сан-Франциско</h3>
+                <p class="text-gray-600 text-sm line-clamp-2">Гази из EMPIRE рассказывает о любви к Сан-Франциско, успехах в музыкальном бизнесе...</p>
+            </article>
+
+            <article class="news-card group cursor-pointer" onclick="window.location.href='article.html?id=3'">
+                <div class="relative rounded-xl overflow-hidden aspect-[4/3] mb-4">
+                    <span class="badge absolute top-4 left-4 bg-black text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Релиз</span>
+                    <img src="https://i.ytimg.com/vi/sCBNlK2HVww/maxresdefault.jpg" 
+                         alt="Wizkid и Asake выпустили 'Real' — гимн 2025 года"
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                         loading="lazy"
+                         onerror="this.src='https://via.placeholder.com/400x300/f3f4f6/000000?text=EMPIRE+NEWS'">
+                </div>
+                <p class="text-xs text-gray-500 mb-2">10 января 2025</p>
+                <h3 class="text-xl font-bold mb-2 group-hover:opacity-70 transition">Wizkid и Asake выпустили 'Real' — гимн 2025 года</h3>
+                <p class="text-gray-600 text-sm line-clamp-2">Нигерийские суперзвёзды объединились для мощного нового сингла...</p>
+            </article>
+
+            <article class="news-card group cursor-pointer" onclick="window.location.href='article.html?id=4'">
+                <div class="relative rounded-xl overflow-hidden aspect-[4/3] mb-4">
+                    <span class="badge absolute top-4 left-4 bg-black text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Новый артист</span>
+                    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop" 
+                         alt="Новые артисты: Познакомьтесь с ростером EMPIRE на 2025 год"
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                         loading="lazy"
+                         onerror="this.src='https://via.placeholder.com/400x300/f3f4f6/000000?text=EMPIRE+NEWS'">
+                </div>
+                <p class="text-xs text-gray-500 mb-2">8 января 2025</p>
+                <h3 class="text-xl font-bold mb-2 group-hover:opacity-70 transition">Новые артисты: Познакомьтесь с ростером EMPIRE на 2025 год</h3>
+                <p class="text-gray-600 text-sm line-clamp-2">Новая волна независимых артистов присоединяется к движению...</p>
+            </article>
+
+            <article class="news-card group cursor-pointer" onclick="window.location.href='article.html?id=5'">
+                <div class="relative rounded-xl overflow-hidden aspect-[4/3] mb-4">
+                    <span class="badge absolute top-4 left-4 bg-black text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Событие</span>
+                    <img src="https://www.unitedagents.co.uk/sites/default/files/thumbnails/image/25sxswwebsite-seo-2.jpg" 
+                         alt="Анонсирован EMPIRE Showcase на SXSW 2025"
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                         loading="lazy"
+                         onerror="this.src='https://via.placeholder.com/400x300/f3f4f6/000000?text=EMPIRE+NEWS'">
+                </div>
+                <p class="text-xs text-gray-500 mb-2">5 января 2025</p>
+                <h3 class="text-xl font-bold mb-2 group-hover:opacity-70 transition">Анонсирован EMPIRE Showcase на SXSW 2025</h3>
+                <p class="text-gray-600 text-sm line-clamp-2">Самый большой независимый воркшоп возвращается в Остин...</p>
+            </article>
+
+            <article class="news-card group cursor-pointer" onclick="window.location.href='article.html?id=6'">
+                <div class="relative rounded-xl overflow-hidden aspect-[4/3] mb-4">
+                    <span class="badge absolute top-4 left-4 bg-black text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Мерч</span>
+                    <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop" 
+                         alt="Новый дроп: Коллекция EMPIRE 1M уже доступна"
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                         loading="lazy"
+                         onerror="this.src='https://via.placeholder.com/400x300/f3f4f6/000000?text=EMPIRE+NEWS'">
+                </div>
+                <p class="text-xs text-gray-500 mb-2">3 января 2025</p>
+                <h3 class="text-xl font-bold mb-2 group-hover:opacity-70 transition">Новый дроп: Коллекция EMPIRE 1M уже доступна</h3>
+                <p class="text-gray-600 text-sm line-clamp-2">Лимитированные худи, футболки и аксессуары...</p>
+            </article>
+
+        </div>
+
+        <div class="text-center mt-12">
+            <button class="bg-black text-white px-8 py-3 rounded-full font-semibold hover:bg-gray-800 transition" onclick="showToast('Загрузка новостей...')">Загрузить ещё</button>
+        </div>
+    </section>
+
+    <div class="bg-black text-white py-4 overflow-hidden border-b border-gray-800">
+        <div class="marquee whitespace-nowrap">
+            <span class="text-sm font-bold tracking-widest mx-8">100% НЕЗАВИСИМОСТЬ</span>
+            <span class="mx-4">
+                <svg width="20" height="20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" class="inline">
+                    <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+                </svg>
+            </span>
+        </div>
+    </div>
+
+    <footer class="bg-black text-white py-16 px-8">
+        <div class="max-w-[1400px] mx-auto text-center">
+            <svg width="50" height="50" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" class="mx-auto mb-4">
+                <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+            </svg>
+            <p class="text-xs text-gray-400">© 2025 EMPIRE DISTRIBUTION</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</body>
+</html>
+
+Style:
+.news-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.news-card:hover {
+    transform: translateY(-4px);
+}
+
+.news-card.hidden {
+    display: none;
+}
+
+.category-pill,
+.filter-btn {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.category-pill:hover,
+.category-pill.active,
+.filter-btn:hover,
+.filter-btn.active {
+    background: black;
+    color: white;
+    border-color: black;
+}
+
+.badge {
+    backdrop-filter: blur(10px);
+}
+
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.marquee {
+    display: flex;
+    animation: marquee 20s linear infinite;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.search-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    z-index: 100;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 15vh;
+}
+
+.search-overlay.active {
+    display: flex;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 600px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid white;
+    color: white;
+    font-size: 2rem;
+    padding: 1rem;
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: rgba(255,255,255,0.5);
+}
+
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: black;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    z-index: 10000;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+img {
+    background: #f3f4f6;
+}
+
+img[data-src] {
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+    background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+img[data-src].loaded,
+img:not([data-src]) {
+    opacity: 1;
+    animation: none;
+    background: none;
+}
+
+img.loaded {
+    animation: fadeInImage 0.4s ease;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+@keyframes fadeInImage {
+    from { 
+        opacity: 0; 
+        transform: scale(1.02); 
+    }
+    to { 
+        opacity: 1; 
+        transform: scale(1); 
+    }
+}
+js:
+const store = {
+    news: [
+        { 
+            id: 1, 
+            title: "Bebe Rexha заключила партнёрство с EMPIRE", 
+            excerpt: "Четырёхкратная номинантка на Грэмми поп-исполнительница и автор песен Bebe Rexha стала независимым артистом...", 
+            image: "https://s.yimg.com/ny/api/res/1.2/O_V_VKcqL40.6Q0Ah2JzrQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDQ7Y2Y9d2VicA--/https://media.zenfs.com/en/wwd_409/f4d5c4e9402f06466cfc2c6701309fbf", 
+            category: "Новый артист", 
+            date: "15 января 2025", 
+            featured: true 
+        },
+        { 
+            id: 2, 
+            title: "Звезда Залива: Как Гази из EMPIRE привёл музыкальный бизнес в Сан-Франциско", 
+            excerpt: "Гази из EMPIRE рассказывает о любви к Сан-Франциско, успехах в музыкальном бизнесе...", 
+            image: "https://www.billboard.com/wp-content/uploads/2025/02/cover-ghazi-billboard-2025-bb03-austin-hargrave-3-1260.jpg", 
+            category: "Интервью", 
+            date: "12 января 2025" 
+        },
+        { 
+            id: 3, 
+            title: "Wizkid и Asake выпустили 'Real' — гимн 2025 года", 
+            excerpt: "Нигерийские суперзвёзды объединились для мощного нового сингла...", 
+            image: "https://i.ytimg.com/vi/sCBNlK2HVww/maxresdefault.jpg", 
+            category: "Релиз", 
+            date: "10 января 2025" 
+        },
+        { 
+            id: 4, 
+            title: "Новые артисты: Познакомьтесь с ростером EMPIRE на 2025 год", 
+            excerpt: "Новая волна независимых артистов присоединяется к движению...", 
+            image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop", 
+            category: "Новый артист", 
+            date: "8 января 2025" 
+        },
+        { 
+            id: 5, 
+            title: "Анонсирован EMPIRE Showcase на SXSW 2025", 
+            excerpt: "Самый большой независимый воркшоп возвращается в Остин...", 
+            image: "https://www.unitedagents.co.uk/sites/default/files/thumbnails/image/25sxswwebsite-seo-2.jpg", 
+            category: "Событие", 
+            date: "5 января 2025" 
+        },
+        { 
+            id: 6, 
+            title: "Новый дроп: Коллекция EMPIRE 1M уже доступна", 
+            excerpt: "Лимитированные худи, футболки и аксессуары...", 
+            image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop", 
+            category: "Мерч", 
+            date: "3 января 2025" 
+        }
+    ]
+};
+
+function renderNews(filter = 'all') {
+    const container = document.getElementById('news-grid');
+    if (!container) return;
+
+    let news = [...store.news];
+
+    if (filter !== 'all') {
+        const filterMap = {
+            'new-artists': 'Новый артист',
+            'releases': 'Релиз',
+            'interviews': 'Интервью',
+            'events': 'Событие',
+            'merch': 'Мерч'
+        };
+        news = news.filter(n => n.category === filterMap[filter]);
+    }
+
+    container.innerHTML = news.map(item => `
+        <div class="news-card group cursor-pointer" onclick="window.location.href='article.html?id=${item.id}'">
+            <div class="relative rounded-xl overflow-hidden aspect-[4/3] mb-4">
+                <span class="badge absolute top-4 left-4 bg-black text-white text-xs font-bold px-3 py-1 rounded-full uppercase">${item.category}</span>
+                <img src="" data-src="${item.image}" width="400" height="300" class="w-full h-full object-cover"
+                     onerror="this.onerror=null; this.src=PlaceholderGenerator.generateError(400, 300)">
+            </div>
+            <p class="text-xs text-gray-500 mb-2">${item.date}</p>
+            <h3 class="text-xl font-bold mb-2 group-hover:opacity-70 transition">${item.title}</h3>
+            <p class="text-gray-600 text-sm line-clamp-2">${item.excerpt}</p>
+        </div>
+    `).join('');
+
+    refreshLazyLoading();
+}
+
+if (window.location.pathname.includes('news')) {
+    const savedFilter = StorageManager.loadNewsFilter();
+    renderNews(savedFilter);
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        if (btn.dataset.filter === savedFilter) {
+            btn.classList.add('active');
+        }
+
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.dataset.filter || 'all';
+            StorageManager.saveNewsFilter(filter);
+            renderNews(filter);
+        });
+    });
+}
