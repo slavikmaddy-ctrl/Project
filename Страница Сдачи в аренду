@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сдать вещь в аренду — EMPIRE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-white text-black">
+
+    <div class="bg-black text-white text-center py-2 text-xs tracking-widest uppercase font-medium">
+        Зарабатывайте на своём стиле — сдавайте вещи в аренду
+    </div>
+
+    <nav class="sticky top-0 z-50 bg-white border-b border-gray-200 px-8 py-4">
+        <div class="max-w-[1400px] mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-8">
+                <a href="index.html" class="text-sm font-medium hover:opacity-70 transition">Главная</a>
+                <a href="shop.html" class="text-sm font-medium hover:opacity-70 transition">Каталог</a>
+                <a href="news.html" class="text-sm font-medium hover:opacity-70 transition">Новости</a>
+                <a href="contact.html" class="text-sm font-medium hover:opacity-70 transition">Контакты</a>
+            </div>
+            
+            <a href="index.html" class="absolute left-1/2 transform -translate-x-1/2">
+                <svg width="40" height="40" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+                </svg>
+            </a>
+
+            <div class="flex items-center gap-6">
+                <button id="search-btn" class="text-sm font-medium hover:opacity-70 transition">Поиск</button>
+                <a href="rent-out.html" class="text-sm font-bold border-b-2 border-black pb-1">Сдать вещь</a>
+                <a href="dashboard.html" class="text-sm font-medium hover:opacity-70 transition">Кабинет</a>
+                <a href="dashboard.html#points" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-red-600 to-red-500 text-white text-sm font-medium hover:shadow-lg transition">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                    <span class="em-balance">0</span> EMB
+                </a>
+                <a href="cart.html" class="flex items-center gap-2 cursor-pointer hover:opacity-70 transition">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="text-sm" id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="bg-black text-white py-20 px-8">
+        <div class="max-w-[1400px] mx-auto text-center">
+            <h1 class="text-5xl md:text-7xl font-black tracking-tighter uppercase mb-6">
+                Зарабатывайте<br>на своём стиле
+            </h1>
+            <p class="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
+                Сдавайте дизайнерские вещи, винил, аксессуары в аренду. 
+                Вы зарабатываете — арендаторы получают стиль без покупки.
+            </p>
+            <div class="flex gap-4 justify-center flex-wrap">
+                <div class="bg-white/10 backdrop-blur rounded-2xl p-6 min-w-[200px]">
+                    <div class="text-4xl font-black text-red-500 mb-2">80%</div>
+                    <div class="text-sm text-gray-400">ваш доход от аренды</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur rounded-2xl p-6 min-w-[200px]">
+                    <div class="text-4xl font-black text-white mb-2">24ч</div>
+                    <div class="text-sm text-gray-400">модерация</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur rounded-2xl p-6 min-w-[200px]">
+                    <div class="text-4xl font-black text-white mb-2">0₽</div>
+                    <div class="text-sm text-gray-400">размещение</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 px-8 bg-gray-50">
+        <div class="max-w-[800px] mx-auto">
+            <h2 class="text-3xl font-black tracking-tighter uppercase mb-8 text-center">
+                Калькулятор дохода
+            </h2>
+            
+            <div class="bg-white rounded-2xl p-8 shadow-lg">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Стоимость вещи ($)</label>
+                        <input type="number" id="calc-price" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-black focus:outline-none" placeholder="500" value="500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Категория</label>
+                        <select id="calc-category" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-black focus:outline-none">
+                            <option value="clothing">Одежда</option>
+                            <option value="accessories">Аксессуары</option>
+                            <option value="music">Винил/CD</option>
+                            <option value="sneakers">Кроссовки</option>
+                            <option value="bags">Сумки</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-4 mb-6">
+                    <div class="text-center p-4 bg-gray-50 rounded-xl">
+                        <div class="text-sm text-gray-500 mb-1">В день</div>
+                        <div class="text-2xl font-bold" id="calc-daily">$25</div>
+                    </div>
+                    <div class="text-center p-4 bg-gray-50 rounded-xl">
+                        <div class="text-sm text-gray-500 mb-1">В месяц</div>
+                        <div class="text-2xl font-bold text-red-600" id="calc-monthly">$600</div>
+                    </div>
+                    <div class="text-center p-4 bg-gray-50 rounded-xl">
+                        <div class="text-sm text-gray-500 mb-1">Ваш доход</div>
+                        <div class="text-2xl font-bold text-green-600" id="calc-income">$480</div>
+                    </div>
+                </div>
+
+                <p class="text-sm text-gray-500 text-center">
+                    * При загрузке 80% и комиссии EMPIRE 20%
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 px-8 max-w-[800px] mx-auto">
+        <h2 class="text-3xl font-black tracking-tighter uppercase mb-8">
+            Разместить вещь
+        </h2>
+
+        <div class="mb-8">
+            <div class="flex justify-between mb-2 text-sm font-medium">
+                <span id="step-label">Шаг 1 из 4: Основное</span>
+                <span id="step-percent">25%</span>
+            </div>
+            <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div id="form-progress" class="h-full bg-black transition-all duration-300" style="width: 25%"></div>
+            </div>
+        </div>
+
+        <form id="rent-form" class="space-y-6">
+            <div class="form-step active" data-step="1">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Название вещи *</label>
+                        <input type="text" name="title" class="input-field w-full px-4 py-3 rounded-lg bg-gray-50" placeholder="Например: Supreme Box Logo Hoodie Black" required>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Категория *</label>
+                            <select name="category" class="input-field w-full px-4 py-3 rounded-lg bg-gray-50" required>
+                                <option value="">Выберите</option>
+                                <option value="clothing">Одежда</option>
+                                <option value="accessories">Аксессуары</option>
+                                <option value="music">Музыка</option>
+                                <option value="sneakers">Кроссовки</option>
+                                <option value="bags">Сумки</option>
+                                <option value="jewelry">Украшения</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Бренд *</label>
+                            <input type="text" name="brand" class="input-field w-full px-4 py-3 rounded-lg bg-gray-50" placeholder="Supreme, Nike, etc." required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Описание *</label>
+                        <textarea name="description" class="input-field w-full px-4 py-3 rounded-lg bg-gray-50 h-24 resize-none" placeholder="Состояние, особенности, история вещи..." required></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-step hidden" data-step="2">
+                <div class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Цена покупки ($) *</label>
+                            <input type="number" name="retailPrice" id="retail-price" class="input-field w-full px-4 py-3 rounded-lg bg-gray-50" placeholder="500" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Рекомендуемая цена аренды/день</label>
+                            <div class="px-4 py-3 rounded-lg bg-gray-100 text-gray-600" id="suggested-price">$25</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Ваша цена аренды ($/день) *</label>
+                        <input type="number" name="rentalPrice" id="rental-price" class="input-field w-full px-4 py-3 rounded-lg bg-gray-50" placeholder="25" required>
+                        <p class="text-xs text-gray-500 mt-1">Рекомендуем: 5-10% от стоимости вещи</p>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-xl p-4">
+                        <h4 class="font-semibold mb-2">Скидки при долгосрочной аренде</h4>
+                        <div class="space-y-2 text-sm">
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" name="discount3" checked class="rounded">
+                                <span>3 дня — скидка 10%</span>
+                            </label>
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" name="discount7" checked class="rounded">
+                                <span>7 дней — скидка 20%</span>
+                            </label>
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" name="discount14" checked class="rounded">
+                                <span>14 дней — скидка 30%</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-step hidden" data-step="3">
+                <div class="space-y-4">
+                    <div class="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-black transition cursor-pointer" id="drop-zone">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto mb-4 text-gray-400">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <p class="font-medium mb-1">Перетащите фото сюда</p>
+                        <p class="text-sm text-gray-500">или нажмите для выбора</p>
+                        <input type="file" multiple accept="image/*" class="hidden" id="photo-input">
+                    </div>
+
+                    <div class="grid grid-cols-4 gap-4" id="photo-preview">
+                    </div>
+
+                    <p class="text-sm text-gray-500">Минимум 3 фото: общий план, детали, бирка/лейбл</p>
+                </div>
+            </div>
+
+            <div class="form-step hidden" data-step="4">
+                <div class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Имя *</label>
+                            <input type="text" name="firstName" class="input-field w-full px-4 py-3 rounded-lg bg-gray-50" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Фамилия *</label>
+                            <input type="text" name="lastName" class="input-field w-full px-4 py-3 rounded-lg bg-gray-50" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Email *</label>
+                        <input type="email" name="email" class="input-field w-full px-4 py-3 rounded-lg bg-gray-50" required>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Телефон *</label>
+                        <input type="tel" name="phone" class="input-field w-full px-4 py-3 rounded-lg bg-gray-50" placeholder="+7 (999) 000-00-00" required>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Город *</label>
+                        <select name="city" class="input-field w-full px-4 py-3 rounded-lg bg-gray-50" required>
+                            <option value="">Выберите город</option>
+                            <option value="moscow">Москва</option>
+                            <option value="spb">Санкт-Петербург</option>
+                            <option value="other">Другой (уточним)</option>
+                        </select>
+                    </div>
+
+                    <label class="flex items-start gap-3">
+                        <input type="checkbox" name="agreement" required class="mt-1 rounded">
+                        <span class="text-sm text-gray-600">
+                            Я согласен с <a href="#" class="underline hover:text-black">условиями размещения</a> 
+                            и подтверждаю подлинность вещи
+                        </span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="flex justify-between pt-6 border-t">
+                <button type="button" id="prev-btn" class="px-6 py-3 rounded-full border border-gray-300 font-medium hover:bg-gray-50 transition hidden">
+                    ← Назад
+                </button>
+                <div class="flex-1"></div>
+                <button type="button" id="next-btn" class="px-8 py-3 rounded-full bg-black text-white font-medium hover:bg-gray-800 transition">
+                    Далее →
+                </button>
+                <button type="submit" id="submit-btn" class="hidden px-8 py-3 rounded-full bg-red-600 text-white font-medium hover:bg-red-700 transition">
+                    Разместить вещь
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <section class="py-16 px-8 bg-black text-white">
+        <div class="max-w-[1400px] mx-auto">
+            <h2 class="text-3xl font-black tracking-tighter uppercase mb-12 text-center">
+                Как это работает
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4 text-2xl">1</div>
+                    <h3 class="font-bold mb-2">Размещаете</h3>
+                    <p class="text-sm text-gray-400">Фото, описание, цена. Модерация за 24 часа</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4 text-2xl">2</div>
+                    <h3 class="font-bold mb-2">Получаете заказы</h3>
+                    <p class="text-sm text-gray-400">Арендаторы бронируют через сайт</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4 text-2xl">3</div>
+                    <h3 class="font-bold mb-2">Передаёте</h3>
+                    <p class="text-sm text-gray-400">В пункте выдачи или курьером</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center mx-auto mb-4 text-2xl">4</div>
+                    <h3 class="font-bold mb-2">Получаете деньги</h3>
+                    <p class="text-sm text-gray-400">80% от каждой аренды на ваш счёт</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 px-8 max-w-[800px] mx-auto">
+        <h2 class="text-3xl font-black tracking-tighter uppercase mb-8">Частые вопросы</h2>
+        
+        <div class="space-y-4" id="faq-container">
+            <details class="group border rounded-xl overflow-hidden">
+                <summary class="flex justify-between items-center p-4 cursor-pointer font-medium hover:bg-gray-50">
+                    Что можно сдавать в аренду?
+                    <span class="transition group-open:rotate-180">▼</span>
+                </summary>
+                <div class="p-4 pt-0 text-gray-600 text-sm">
+                    Дизайнерскую одежду, виниловые пластинки, аксессуары премиум-класса, 
+                    кроссовки limited edition, сумки и рюкзаки. Главное — подлинность и хорошее состояние.
+                </div>
+            </details>
+            
+            <details class="group border rounded-xl overflow-hidden">
+                <summary class="flex justify-between items-center p-4 cursor-pointer font-medium hover:bg-gray-50">
+                    Как определяется цена аренды?
+                    <span class="transition group-open:rotate-180">▼</span>
+                </summary>
+                <div class="p-4 pt-0 text-gray-600 text-sm">
+                    Рекомендуем 5-10% от розничной цены в день. Система подскажет оптимальную цену 
+                    на основе аналогов. Вы можете установить свою цену.
+                </div>
+            </details>
+            
+            <details class="group border rounded-xl overflow-hidden">
+                <summary class="flex justify-between items-center p-4 cursor-pointer font-medium hover:bg-gray-50">
+                    Что если вещь повредят?
+                    <span class="transition group-open:rotate-180">▼</span>
+                </summary>
+                <div class="p-4 pt-0 text-gray-600 text-sm">
+                    Каждая аренда застрахована. При повреждении мы компенсируем ремонт или 
+                    рыночную стоимость вещи. Депозит арендатора также покрывает мелкие повреждения.
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <div class="bg-black text-white py-4 overflow-hidden border-b border-gray-800">
+        <div class="marquee whitespace-nowrap">
+            <span class="text-sm font-bold tracking-widest mx-8">100% НЕЗАВИСИМОСТЬ</span>
+            <span class="mx-4">
+                <svg width="20" height="20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" class="inline">
+                    <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+                </svg>
+            </span>
+        </div>
+    </div>
+
+    <footer class="bg-black text-white py-16 px-8">
+        <div class="max-w-[1400px] mx-auto text-center">
+            <svg width="50" height="50" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" class="mx-auto mb-4">
+                <circle cx="50" cy="50" r="45"/><path d="M30 50 L50 30 L70 50 L50 70 Z" fill="none"/><circle cx="50" cy="50" r="15"/>
+            </svg>
+            <p class="text-xs text-gray-400">© 2025 EMPIRE DISTRIBUTION</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
+
+
+Стили: 
+.input-valid {
+    border-color: #16a34a !important;
+    background: #f0fdf4 !important;
+}
+
+.input-invalid {
+    border-color: #dc2626 !important;
+    background: #fef2f2 !important;
+}
+
+.btn-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: btn-spin 0.8s linear infinite;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+@keyframes btn-spin {
+    to { transform: rotate(360deg); }
+}
+
+.input-field {
+    transition: all 0.3s ease;
+    border: 2px solid #e5e7eb;
+}
+
+.input-field:focus {
+    border-color: black;
+    outline: none;
+}
+
+.bg-white\/10 {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.backdrop-blur {
+    backdrop-filter: blur(10px);
+}
+
+#calc-daily,
+#calc-monthly,
+#calc-income {
+    font-variant-numeric: tabular-nums;
+}
+
+.form-step {
+    transition: all 0.3s ease;
+}
+
+.form-step.hidden {
+    display: none;
+}
+
+.form-step.active {
+    animation: fadeIn 0.3s ease;
+}
+
+#form-progress {
+    transition: width 0.3s ease;
+}
+
+#drop-zone {
+    transition: all 0.3s ease;
+}
+
+#drop-zone:hover {
+    border-color: #000;
+    background: #f9fafb;
+}
+
+#drop-zone.border-black {
+    border-color: #000;
+}
+
+#photo-preview {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+#photo-preview .relative {
+    position: relative;
+}
+
+#photo-preview button {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: #000;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#photo-preview button:hover {
+    background: #dc2626;
+}
+
+details.group {
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+details.group summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s ease;
+}
+
+details.group summary:hover {
+    background: #f9fafb;
+}
+
+details.group summary span {
+    transition: transform 0.3s ease;
+}
+
+details.group[open] summary span {
+    transform: rotate(180deg);
+}
+
+details.group > div {
+    padding: 0 1rem 1rem;
+    color: #4b5563;
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+.w-16.h-16.rounded-full.bg-white\/10 {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
+}
+
+.w-16.h-16.rounded-full.bg-red-600 {
+    background: #dc2626;
+}
+
+#suggested-price {
+    background: #f3f4f6;
+    color: #4b5563;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+}
+
+input[type="checkbox"].rounded {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.25rem;
+    border: 2px solid #d1d5db;
+    appearance: none;
+    cursor: pointer;
+    position: relative;
+}
+
+input[type="checkbox"].rounded:checked {
+    background: #000;
+    border-color: #000;
+}
+
+input[type="checkbox"].rounded:checked::after {
+    content: '✓';
+    position: absolute;
+    color: #fff;
+    font-size: 0.625rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+select.input-field {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+}
+
+input[type="number"] {
+    appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+JS:
+        (function() {
+            let currentStep = 1;
+            const totalSteps = 4;
+            
+            const form = document.getElementById('rent-form');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const submitBtn = document.getElementById('submit-btn');
+            const progressBar = document.getElementById('form-progress');
+            const stepLabel = document.getElementById('step-label');
+            const stepPercent = document.getElementById('step-percent');
+            
+            const calcPrice = document.getElementById('calc-price');
+            const calcCategory = document.getElementById('calc-category');
+            const calcDaily = document.getElementById('calc-daily');
+            const calcMonthly = document.getElementById('calc-monthly');
+            const calcIncome = document.getElementById('calc-income');
+            const retailPrice = document.getElementById('retail-price');
+            const rentalPrice = document.getElementById('rental-price');
+            const suggestedPrice = document.getElementById('suggested-price');
+            
+            function updateCalculator() {
+                const price = parseFloat(calcPrice.value) || 0;
+                const category = calcCategory.value;
+                
+                const rates = {
+                    clothing: 0.05,
+                    accessories: 0.04,
+                    music: 0.03,
+                    sneakers: 0.06,
+                    bags: 0.04,
+                    jewelry: 0.03
+                };
+                
+                const daily = Math.round(price * (rates[category] || 0.05));
+                const monthly = daily * 24; // 80% загрузка
+                const income = Math.round(monthly * 0.8);
+                
+                calcDaily.textContent = `$${daily}`;
+                calcMonthly.textContent = `$${monthly}`;
+                calcIncome.textContent = `$${income}`;
+            }
+            
+            calcPrice?.addEventListener('input', updateCalculator);
+            calcCategory?.addEventListener('change', updateCalculator);
+            
+            retailPrice?.addEventListener('input', (e) => {
+                const val = parseFloat(e.target.value) || 0;
+                const suggested = Math.round(val * 0.05);
+                suggestedPrice.textContent = `$${suggested}`;
+                if (!rentalPrice.value) rentalPrice.value = suggested;
+            });
+            
+            function showStep(step) {
+                document.querySelectorAll('.form-step').forEach(s => s.classList.add('hidden'));
+                document.querySelector(`.form-step[data-step="${step}"]`).classList.remove('hidden');
+                
+                prevBtn.classList.toggle('hidden', step === 1);
+                nextBtn.classList.toggle('hidden', step === totalSteps);
+                submitBtn.classList.toggle('hidden', step !== totalSteps);
+                
+                const percent = (step / totalSteps) * 100;
+                progressBar.style.width = `${percent}%`;
+                stepLabel.textContent = `Шаг ${step} из ${totalSteps}: ${getStepName(step)}`;
+                stepPercent.textContent = `${Math.round(percent)}%`;
+                
+                currentStep = step;
+            }
+            
+            function getStepName(step) {
+                const names = ['', 'Основное', 'Ценообразование', 'Фото', 'Контакты'];
+                return names[step];
+            }
+            
+            function validateStep(step) {
+                const stepEl = document.querySelector(`.form-step[data-step="${step}"]`);
+                const required = stepEl.querySelectorAll('[required]');
+                let valid = true;
+                
+                required.forEach(field => {
+                    if (!field.value.trim()) {
+                        field.classList.add('input-invalid');
+                        valid = false;
+                    } else {
+                        field.classList.remove('input-invalid');
+                    }
+                });
+                
+                if (!valid) showToast('Заполните все обязательные поля', 'error');
+                return valid;
+            }
+            
+            nextBtn?.addEventListener('click', () => {
+                if (validateStep(currentStep) && currentStep < totalSteps) {
+                    showStep(currentStep + 1);
+                }
+            });
+            
+            prevBtn?.addEventListener('click', () => {
+                if (currentStep > 1) showStep(currentStep - 1);
+            });
+            
+            const dropZone = document.getElementById('drop-zone');
+            const photoInput = document.getElementById('photo-input');
+            const photoPreview = document.getElementById('photo-preview');
+            let uploadedPhotos = [];
+            
+            dropZone?.addEventListener('click', () => photoInput.click());
+            
+            dropZone?.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('border-black', 'bg-gray-50');
+            });
+            
+            dropZone?.addEventListener('dragleave', () => {
+                dropZone.classList.remove('border-black', 'bg-gray-50');
+            });
+            
+            dropZone?.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('border-black', 'bg-gray-50');
+                handleFiles(e.dataTransfer.files);
+            });
+            
+            photoInput?.addEventListener('change', (e) => handleFiles(e.target.files));
+            
+            function handleFiles(files) {
+                Array.from(files).forEach(file => {
+                    if (!file.type.startsWith('image/')) return;
+                    
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        uploadedPhotos.push(e.target.result);
+                        renderPreviews();
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+            
+            function renderPreviews() {
+                photoPreview.innerHTML = uploadedPhotos.map((src, i) => `
+                    <div class="relative aspect-square rounded-lg overflow-hidden">
+                        <img src="${src}" class="w-full h-full object-cover">
+                        <button type="button" onclick="removePhoto(${i})" class="absolute top-1 right-1 w-6 h-6 bg-black text-white rounded-full text-xs">×</button>
+                    </div>
+                `).join('');
+            }
+            
+            window.removePhoto = (index) => {
+                uploadedPhotos.splice(index, 1);
+                renderPreviews();
+            };
+            
+            form?.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData);
+                data.photos = uploadedPhotos;
+                data.status = 'pending';
+                data.createdAt = new Date().toISOString();
+                data.id = Date.now();
+                
+                const listings = JSON.parse(localStorage.getItem('empire_listings') || '[]');
+                listings.push(data);
+                localStorage.setItem('empire_listings', JSON.stringify(listings));
+                
+                submitBtn.innerHTML = '<span class="btn-spinner"></span>Отправка...';
+                
+                setTimeout(() => {
+                    showToast('Вещь отправлена на модерацию!', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1500);
+                }, 1000);
+            });
+            
+            updateCalculator();
+        })();
+
+
+function calculatePrice(basePrice, basePeriod, targetPeriod) {
+    const periods = { "1 день": 1, "3 дня": 3, "7 дней": 7, "14 дней": 14, "30 дней": 30 };
+    const baseDays = periods[basePeriod] || 1;
+    const targetDays = periods[targetPeriod] || 1;
+
+    let multiplier = targetDays / baseDays;
+    if (targetDays >= 7) multiplier *= 0.85;
+    if (targetDays >= 14) multiplier *= 0.80;
+    if (targetDays >= 30) multiplier *= 0.70;
+
+    return Math.round(basePrice * multiplier);
+}
+
+
+const StorageManager = {
+    saveListing(listing) {
+        const listings = JSON.parse(localStorage.getItem('empire_listings') || '[]');
+        listings.push(listing);
+        localStorage.setItem('empire_listings', JSON.stringify(listings));
+    },
+
+    getListings() {
+        return JSON.parse(localStorage.getItem('empire_listings') || '[]');
+    }
+};
+
+document.getElementById('rent-form')?.addEventListener('submit', (e) => {
+    const listings = EMPoints.getPoints().history.filter(h => h.reason === 'listItem');
+    if (listings.length === 0) {
+        EMPoints.earn(store.emEarnRates.listItem, 'listItem');
+    }
+});
+
+function approveListing(listingId) {
+    EMPoints.earn(store.emEarnRates.itemApproved, 'itemApproved', { listingId });
+}
+
+
+const store = {
+    
+    simulateRental() {
+        const listings = this.getListings().filter(l => l.status === 'approved');
+        if (listings.length === 0 || Math.random() > 0.3) return; // 30% шанс
+        
+        const listing = listings[Math.floor(Math.random() * listings.length)];
+        const days = [1, 3, 7][Math.floor(Math.random() * 3)];
+        const rental = {
+            id: Date.now(),
+            listingId: listing.id,
+            listingTitle: listing.title,
+            days: days,
+            total: listing.rentalPrice * days,
+            ownerEarnings: Math.round(listing.rentalPrice * days * 0.8),
+            date: new Date().toISOString(),
+            status: 'completed'
+        };
+        
+        const rentals = JSON.parse(localStorage.getItem('empire_rentals') || '[]');
+        rentals.push(rental);
+        localStorage.setItem('empire_rentals', JSON.stringify(rentals));
+        
+        console.log(' Новая аренда:', rental);
+    }
+};
+
